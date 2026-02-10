@@ -48,7 +48,7 @@ namespace CustomerSaleSYS
             dropdown1.Timer.Interval = 30;
             dropdown2.Timer.Interval = 30;
             dropdown3.Timer.Interval = 30;
-            dropdown3.Timer.Interval = 30;
+            dropdown4.Timer.Interval = 30;
 
             dropdown1.Timer.Tick += (s, e) => AnimateDropdown(dropdown1);
             dropdown2.Timer.Tick += (s, e) => AnimateDropdown(dropdown2);
