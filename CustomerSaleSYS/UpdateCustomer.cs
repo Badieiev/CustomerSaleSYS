@@ -12,6 +12,7 @@ namespace CustomerSaleSYS
 {
     public partial class UpdateCustomer : Form
     {
+        private Customer customer;
         public UpdateCustomer()
         {
             InitializeComponent();
@@ -24,25 +25,19 @@ namespace CustomerSaleSYS
 
         private void buttonSearchCustomer_Click(object sender, EventArgs e)
         {
-            if (textSearchCustomer.Text == "")
+            grdCustomers.DataSource = Customer.FindCustomers(textSearchCustomer.Text).Tables[0];
+
+            if (grdCustomers.Rows.Count == 0)
             {
-                MessageBox.Show("Fill in the search field");
+                MessageBox.Show("No Data Found");
+                textSearchCustomer.Focus();
+                return;
             }
-            else 
-            { 
-                labelCustomerId.Visible = true;
-                textCustomerId.Visible = true;
-                labelName.Visible = true;
-                textName.Visible = true;
-                labelSurname.Visible = true;
-                textSurname.Visible = true;
-                labelPhone.Visible = true;
-                textPhone.Visible = true;
-                labelEmail.Visible = true;
-                textEmail.Visible = true;
-                buttonUpdateCustomer.Visible = true;
-            }
+
+            grdCustomers.Visible = true;
+
         }
+
 
         private void buttonUpdateCustomer_Click(object sender, EventArgs e)
         {
@@ -55,6 +50,19 @@ namespace CustomerSaleSYS
                 MessageBox.Show("Profile updated");
                 this.Close();
             }
+        }
+
+        private void grdCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int Id = Convert.ToInt32(grdCustomers.Rows[grdCustomers.CurrentCell.RowIndex].Cells[0].Value);
+
+            customer = Customer.GetCustomer(Id);
+            textName.Text = customer.FirstName;
+            textSurname.Text = customer.LastName;
+            textPhone.Text = customer.Phone;
+            textEmail.Text = customer.Email;
+
+            grpCustomer.Visible = true;
         }
     }
 }
