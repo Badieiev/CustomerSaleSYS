@@ -19,9 +19,9 @@ namespace CustomerSaleSYS
             InitializeComponent();
         }
 
-        private void textName_TextChanged(object sender, EventArgs e)
+        private void FormAddCustomerLoad(object sender, EventArgs e)
         {
-
+            textID.Text = Customer.GetNextCustomerID().ToString("0000");
         }
 
         private void buttonAddCustomer_Click(object sender, EventArgs e)
@@ -48,6 +48,8 @@ namespace CustomerSaleSYS
             }
             else 
             {
+                Customer aCustomer = new Customer(Convert.ToInt32(textID.Text), textName.Text, textSurname.Text, textPhone.Text, textEmail.Text);
+                aCustomer.AddCustomer();
                 MessageBox.Show("Customer added");
                 this.Close();
             }

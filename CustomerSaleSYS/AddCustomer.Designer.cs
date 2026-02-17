@@ -38,21 +38,24 @@
             this.textEmail = new System.Windows.Forms.TextBox();
             this.buttonAddCustomer = new System.Windows.Forms.Button();
             this.buttonCloseForm = new System.Windows.Forms.Button();
+            this.labelID = new System.Windows.Forms.Label();
+            this.textID = new System.Windows.Forms.TextBox();
+            this.grpCustomer = new System.Windows.Forms.GroupBox();
+            this.grpCustomer.SuspendLayout();
             this.SuspendLayout();
             // 
             // textName
             // 
-            this.textName.Location = new System.Drawing.Point(164, 98);
+            this.textName.Location = new System.Drawing.Point(94, 86);
             this.textName.Name = "textName";
             this.textName.Size = new System.Drawing.Size(191, 20);
             this.textName.TabIndex = 0;
-            this.textName.TextChanged += new System.EventHandler(this.textName_TextChanged);
             // 
             // labelName
             // 
             this.labelName.AutoSize = true;
             this.labelName.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelName.Location = new System.Drawing.Point(105, 98);
+            this.labelName.Location = new System.Drawing.Point(35, 86);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(55, 16);
             this.labelName.TabIndex = 1;
@@ -62,7 +65,7 @@
             // 
             this.labelSurname.AutoSize = true;
             this.labelSurname.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSurname.Location = new System.Drawing.Point(87, 152);
+            this.labelSurname.Location = new System.Drawing.Point(17, 140);
             this.labelSurname.Name = "labelSurname";
             this.labelSurname.Size = new System.Drawing.Size(71, 16);
             this.labelSurname.TabIndex = 2;
@@ -70,7 +73,7 @@
             // 
             // textSurname
             // 
-            this.textSurname.Location = new System.Drawing.Point(164, 152);
+            this.textSurname.Location = new System.Drawing.Point(94, 140);
             this.textSurname.Name = "textSurname";
             this.textSurname.Size = new System.Drawing.Size(191, 20);
             this.textSurname.TabIndex = 3;
@@ -79,7 +82,7 @@
             // 
             this.labelPhone.AutoSize = true;
             this.labelPhone.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPhone.Location = new System.Drawing.Point(103, 210);
+            this.labelPhone.Location = new System.Drawing.Point(33, 198);
             this.labelPhone.Name = "labelPhone";
             this.labelPhone.Size = new System.Drawing.Size(55, 16);
             this.labelPhone.TabIndex = 4;
@@ -87,7 +90,7 @@
             // 
             // textPhone
             // 
-            this.textPhone.Location = new System.Drawing.Point(164, 208);
+            this.textPhone.Location = new System.Drawing.Point(94, 196);
             this.textPhone.Name = "textPhone";
             this.textPhone.Size = new System.Drawing.Size(191, 20);
             this.textPhone.TabIndex = 5;
@@ -96,7 +99,7 @@
             // 
             this.labelEmail.AutoSize = true;
             this.labelEmail.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelEmail.Location = new System.Drawing.Point(103, 266);
+            this.labelEmail.Location = new System.Drawing.Point(33, 254);
             this.labelEmail.Name = "labelEmail";
             this.labelEmail.Size = new System.Drawing.Size(55, 16);
             this.labelEmail.TabIndex = 6;
@@ -104,7 +107,7 @@
             // 
             // textEmail
             // 
-            this.textEmail.Location = new System.Drawing.Point(164, 262);
+            this.textEmail.Location = new System.Drawing.Point(94, 250);
             this.textEmail.Name = "textEmail";
             this.textEmail.Size = new System.Drawing.Size(191, 20);
             this.textEmail.TabIndex = 7;
@@ -112,7 +115,7 @@
             // buttonAddCustomer
             // 
             this.buttonAddCustomer.Font = new System.Drawing.Font("Corbel", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddCustomer.Location = new System.Drawing.Point(199, 327);
+            this.buttonAddCustomer.Location = new System.Drawing.Point(129, 315);
             this.buttonAddCustomer.Name = "buttonAddCustomer";
             this.buttonAddCustomer.Size = new System.Drawing.Size(117, 23);
             this.buttonAddCustomer.TabIndex = 8;
@@ -131,26 +134,58 @@
             this.buttonCloseForm.UseVisualStyleBackColor = true;
             this.buttonCloseForm.Click += new System.EventHandler(this.buttonCloseForm_Click);
             // 
+            // labelID
+            // 
+            this.labelID.AutoSize = true;
+            this.labelID.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelID.Location = new System.Drawing.Point(49, 36);
+            this.labelID.Name = "labelID";
+            this.labelID.Size = new System.Drawing.Size(39, 16);
+            this.labelID.TabIndex = 10;
+            this.labelID.Text = "ID: ";
+            // 
+            // textID
+            // 
+            this.textID.Location = new System.Drawing.Point(94, 36);
+            this.textID.Name = "textID";
+            this.textID.ReadOnly = true;
+            this.textID.Size = new System.Drawing.Size(191, 20);
+            this.textID.TabIndex = 11;
+            // 
+            // grpCustomer
+            // 
+            this.grpCustomer.Controls.Add(this.textID);
+            this.grpCustomer.Controls.Add(this.labelID);
+            this.grpCustomer.Controls.Add(this.buttonAddCustomer);
+            this.grpCustomer.Controls.Add(this.textEmail);
+            this.grpCustomer.Controls.Add(this.labelEmail);
+            this.grpCustomer.Controls.Add(this.textPhone);
+            this.grpCustomer.Controls.Add(this.labelPhone);
+            this.grpCustomer.Controls.Add(this.textSurname);
+            this.grpCustomer.Controls.Add(this.labelSurname);
+            this.grpCustomer.Controls.Add(this.labelName);
+            this.grpCustomer.Controls.Add(this.textName);
+            this.grpCustomer.Location = new System.Drawing.Point(70, 65);
+            this.grpCustomer.Name = "grpCustomer";
+            this.grpCustomer.Size = new System.Drawing.Size(350, 350);
+            this.grpCustomer.TabIndex = 12;
+            this.grpCustomer.TabStop = false;
+            this.grpCustomer.Text = "Enter Customer details";
+            // 
             // AddCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.grpCustomer);
             this.Controls.Add(this.buttonCloseForm);
-            this.Controls.Add(this.buttonAddCustomer);
-            this.Controls.Add(this.textEmail);
-            this.Controls.Add(this.labelEmail);
-            this.Controls.Add(this.textPhone);
-            this.Controls.Add(this.labelPhone);
-            this.Controls.Add(this.textSurname);
-            this.Controls.Add(this.labelSurname);
-            this.Controls.Add(this.labelName);
-            this.Controls.Add(this.textName);
             this.Name = "AddCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddCustomer";
+            this.Load += new System.EventHandler(this.FormAddCustomerLoad);
+            this.grpCustomer.ResumeLayout(false);
+            this.grpCustomer.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -166,5 +201,8 @@
         private System.Windows.Forms.TextBox textEmail;
         private System.Windows.Forms.Button buttonAddCustomer;
         private System.Windows.Forms.Button buttonCloseForm;
+        private System.Windows.Forms.Label labelID;
+        private System.Windows.Forms.TextBox textID;
+        private System.Windows.Forms.GroupBox grpCustomer;
     }
 }

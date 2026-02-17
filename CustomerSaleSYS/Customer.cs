@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +50,32 @@ namespace CustomerSaleSYS
             string sqlQuery = "SELECT CustomerID, Forename, Surname, Email FROM Customers " +
                 "WHERE Forename LIKE '%" + name + "%' ORDER BY Forename";
             return Database.ExecuteMultiRowQuery(sqlQuery);
+        }
+
+        public void AddCustomer()
+        {
+            Debug.WriteLine(this);//displaying state of the Customer object
+            string sqlQuery = "INSERT INTO Customers Values (" +
+                Id + ",'" +
+                FirstName + "','" +
+                LastName + "','" +
+                Phone + "','" +
+                Email + "')";
+            Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public static int GetNextCustomerID()
+        {
+            string sqlQuery = "SELECT MAX(CustomerId) FROM Customers";
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
+            int nextId;
+            dr.Read();
+            if (dr.IsDBNull(0))
+                nextId = 1;
+            else
+                nextId = dr.GetInt32(0) + 1;
+            dr.Close() ;
+            return nextId;
         }
     }
 }
