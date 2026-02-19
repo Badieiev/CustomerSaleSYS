@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,8 +48,27 @@ namespace CustomerSaleSYS
 
         public static DataSet FindCustomers(String name) 
         {
-            string sqlQuery = "SELECT CustomerID, Forename, Surname, Email FROM Customers " +
-                "WHERE Forename LIKE '%" + name + "%' ORDER BY Forename";
+            string sqlQuery = "SELECT CustomerID, Forename, Surname, Email FROM Customers WHERE ";
+            if (name.Trim() == "")
+            {
+                sqlQuery += "Forename LIKE '%" + name + "%' ORDER BY Forename";
+            }
+            else {
+                //https://learn.microsoft.com/en-us/dotnet/api/system.stringsplitoptions?view=net-10.0
+                string[] check = name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                List<string> strings = new List<string>();
+                for (int i = 0; i < check.Length; i++)
+                {
+                    strings.Add($"(Forename LIKE '%{check[i]}%' OR Surname LIKE '%{check[i]}%')");
+                }
+                sqlQuery += string.Join(" OR ", strings);
+                sqlQuery += " ORDER BY Forename";
+            }
+
+            /*string sqlQuery = "SELECT CustomerID, Forename, Surname, Email FROM Customers " +
+                "WHERE Forename LIKE '%" + name + "%' ORDER BY Forename";*/
+
             return Database.ExecuteMultiRowQuery(sqlQuery);
         }
 

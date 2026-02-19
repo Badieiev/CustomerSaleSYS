@@ -56,7 +56,7 @@
             this.buttonCloseForm.TabIndex = 19;
             this.buttonCloseForm.Text = "Close Form";
             this.buttonCloseForm.UseVisualStyleBackColor = true;
-            this.buttonCloseForm.Click += new System.EventHandler(this.buttonCloseForm_Click);
+            this.buttonCloseForm.Click += new System.EventHandler(this.ButtonCloseForm_Click);
             // 
             // labelSearchCustomer
             // 
@@ -84,7 +84,7 @@
             this.buttonSearchCustomer.TabIndex = 24;
             this.buttonSearchCustomer.Text = "Search";
             this.buttonSearchCustomer.UseVisualStyleBackColor = true;
-            this.buttonSearchCustomer.Click += new System.EventHandler(this.buttonSearchCustomer_Click);
+            this.buttonSearchCustomer.Click += new System.EventHandler(this.ButtonSearchCustomer_Click);
             // 
             // grdCustomers
             // 
@@ -96,7 +96,8 @@
             this.grdCustomers.Size = new System.Drawing.Size(450, 280);
             this.grdCustomers.TabIndex = 26;
             this.grdCustomers.Visible = false;
-            this.grdCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCustomers_CellContentClick);
+            //this.grdCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrdCustomersCellClick);
+            this.grdCustomers.CellClick += GrdCustomersCellClick;
             // 
             // textName
             // 
@@ -175,7 +176,7 @@
             this.buttonUpdateCustomer.TabIndex = 18;
             this.buttonUpdateCustomer.Text = "Update Customer";
             this.buttonUpdateCustomer.UseVisualStyleBackColor = true;
-            this.buttonUpdateCustomer.Click += new System.EventHandler(this.buttonUpdateCustomer_Click);
+            this.buttonUpdateCustomer.Click += new System.EventHandler(this.ButtonUpdateCustomer_Click);
             // 
             // grpCustomer
             // 
