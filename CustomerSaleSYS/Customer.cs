@@ -56,11 +56,14 @@ namespace CustomerSaleSYS
             else {
                 //https://learn.microsoft.com/en-us/dotnet/api/system.stringsplitoptions?view=net-10.0
                 string[] check = name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
+                for (int i = 0; i < check.Length; i++)
+                {
+                    check[i] = check[i].ToLower();
+                }
                 List<string> strings = new List<string>();
                 for (int i = 0; i < check.Length; i++)
                 {
-                    strings.Add($"(Forename LIKE '%{check[i]}%' OR Surname LIKE '%{check[i]}%')");
+                    strings.Add($"(LOWER(Forename) LIKE '%{check[i]}%' OR LOWER(Surname) LIKE '%{check[i]}%')");
                 }
                 sqlQuery += string.Join(" OR ", strings);
                 sqlQuery += " ORDER BY Forename";
