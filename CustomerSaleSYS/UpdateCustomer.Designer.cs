@@ -96,8 +96,6 @@
             this.grdCustomers.Size = new System.Drawing.Size(450, 280);
             this.grdCustomers.TabIndex = 26;
             this.grdCustomers.Visible = false;
-            //this.grdCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrdCustomersCellClick);
-            this.grdCustomers.CellClick += GrdCustomersCellClick;
             // 
             // textName
             // 
