@@ -12,6 +12,7 @@ namespace CustomerSaleSYS
 {
     public partial class UpdateProduct : Form
     {
+        private Product product;
         public UpdateProduct()
         {
             InitializeComponent();
@@ -19,27 +20,39 @@ namespace CustomerSaleSYS
 
         private void buttonSearchProduct_Click(object sender, EventArgs e)
         {
-            if (textSearchProduct.Text == "")
+            grdProducts.DataSource = Product.FindAllProducts(textSearchProduct.Text).Tables[0];
+
+            if (grdProducts.Rows.Count == 0)
             {
-                MessageBox.Show("Fill in the search field");
+                MessageBox.Show("No Data Found");
+                textSearchProduct.Focus();
+                return;
+            }
+            grdProducts.Visible = true;
+        }
+
+        private void GrdProductsCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int id = Convert.ToInt32(grdProducts.Rows[grdProducts.CurrentCell.RowIndex].Cells[0].Value);
+            product = Product.GetProduct(id);
+            textName.Text = product.Name;
+            textQuantity.Text = product.Quantity.ToString("000");
+            textPrice.Text = product.Price.ToString("###0.00");
+            cboStatus.Items.Clear();
+            cboStatus.Items.Add(product.Status);
+            cboStatus.Items.Add(Product.AddCboItem(product.Status));
+            cboStatus.SelectedIndex = 0;
+            if (product.Status == 'A')
+            {
+                cboStatus.Visible = false;
+                labelStatus.Visible = false;
             }
             else
             {
-                labelProductId.Visible = true;
-                textProductId.Visible = true;
-                labelName.Visible = true;
-                textName.Visible = true;
-                labelQuantity.Visible = true;
-                textQuantity.Visible = true;
-                labelPrice.Visible = true;
-                textPrice.Visible = true;
-                buttonUpdateProduct.Visible = true;
+                cboStatus.Visible = true;
+                labelStatus.Visible = true;
             }
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            grpProduct.Visible = true;
         }
 
         private void buttonUpdateProduct_Click(object sender, EventArgs e)
@@ -48,8 +61,22 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("Fill in all fields");
             }
+            else if (!Validation.IsValidQuantity(textQuantity.Text))
+            {
+                MessageBox.Show("Incorrect data entered in the quantity field.");
+            }
+            else if (!Validation.IsValidDecimal(textPrice.Text))
+            {
+                MessageBox.Show("Incorrect data entered in the price field.");
+            }
             else
             {
+                //check name
+                product.Name = textName.Text;
+                product.Quantity = Convert.ToInt32(textQuantity.Text);
+                product.Price = Convert.ToDecimal(textPrice.Text);
+                product.Status = cboStatus.Text[0];
+                product.UpdateProduct();
                 MessageBox.Show("Product updated");
                 this.Close();
             }

@@ -12,40 +12,49 @@ namespace CustomerSaleSYS
 {
     public partial class RemoveCustomer : Form
     {
+        private Customer customer;
         public RemoveCustomer()
         {
             InitializeComponent();
         }
 
-        private void buttonSearchCustomer_Click(object sender, EventArgs e)
+        private void ButtonSearchCustomer_Click(object sender, EventArgs e)
         {
-            if (textSearchCustomer.Text == "")
+            grdCustomers.DataSource = Customer.FindActiveCustomers(textSearchCustomer.Text).Tables[0];
+
+            if (grdCustomers.Rows.Count == 0)
             {
-                MessageBox.Show("Fill in the search field");
+                MessageBox.Show("No Data Found");
+                textSearchCustomer.Focus();
+                return;
             }
-            else
-            {
-                labelCustomerId.Visible = true;
-                textCustomerId.Visible = true;
-                labelName.Visible = true;
-                textName.Visible = true;
-                labelSurname.Visible = true;
-                textSurname.Visible = true;
-                labelPhone.Visible = true;
-                textPhone.Visible = true;
-                labelEmail.Visible = true;
-                textEmail.Visible = true;
-                buttonDeleteCustomer.Visible = true;
-            }
+            grdCustomers.Visible = true;
+        }
+        private void GrdCustomersCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int id = Convert.ToInt32(grdCustomers.Rows[grdCustomers.CurrentCell.RowIndex].Cells[0].Value);
+            customer = Customer.GetCustomer(id);
+            textCustomerId.Text = customer.Id.ToString();
+            textName.Text = customer.FirstName;
+            textSurname.Text = customer.LastName;
+            textPhone.Text = customer.Phone;
+            textEmail.Text = customer.Email;
+            grpCustomer.Visible = true;
         }
 
-        private void buttonDeleteCustomer_Click(object sender, EventArgs e)
+        private void ButtonDeleteCustomer_Click(object sender, EventArgs e)
         {
+            customer.FirstName = textName.Text;
+            customer.LastName = textSurname.Text;
+            customer.Phone = textPhone.Text;
+            customer.Email = textEmail.Text;
+            customer.Status = 'I';
+            customer.UpdateCustomer();
             MessageBox.Show("Profile deleted");
             this.Close();
         }
 
-        private void buttonCloseForm_Click(object sender, EventArgs e)
+        private void ButtonCloseForm_Click(object sender, EventArgs e)
         {
             this.Close();
         }

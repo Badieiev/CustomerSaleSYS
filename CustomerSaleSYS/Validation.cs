@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CustomerSaleSYS
 {
@@ -83,6 +79,14 @@ namespace CustomerSaleSYS
             {
                 return false;
             }
+        }
+
+        public static bool IsValidStatus(char c)
+        {
+            if ( c == 'A' ||  c == 'I')
+                { return true; }
+            else 
+                return false;
         }
     }
 }

@@ -3,10 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CustomerSaleSYS
 {
@@ -16,20 +12,33 @@ namespace CustomerSaleSYS
         public string LastName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public char Status {  get; set; }
 
-        public Customer(int id, string firstName, string lastName, string phone, string email) 
+
+        public Customer(int id, string firstName, string lastName, string phone, string email)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Phone = phone;
             Email = email;
+            Status = 'A';
+        }
+        public Customer(int id, string firstName, string lastName, string phone, string email, char status) 
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Phone = phone;
+            Email = email;
+            Status = status;
         }
 
+        //0
         public override string ToString() 
         {
             return "Customer ID: " + Id + "\tName: " + FirstName + "\tSurname: " + LastName + 
-                "\tPhone: " + Phone + "\tEmail: " + Email;
+                "\tPhone: " + Phone + "\tEmail: " + Email + "\tStatus: " + Status;
         }
 
         public static Customer GetCustomer(int id)
@@ -41,12 +50,13 @@ namespace CustomerSaleSYS
             string lastName = dr.GetString(2);
             string phone = dr.GetString(3);
             string email = dr.GetString(4);
+            char status = dr.GetString(5)[0];
             dr.Close();
             
-            return new Customer(id, firstName, lastName, phone, email); 
+            return new Customer(id, firstName, lastName, phone, email, status); 
         }
 
-        public static DataSet FindCustomers(String name) 
+        public static DataSet FindAllCustomers(String name) 
         {
             string sqlQuery = "SELECT CustomerID, Forename, Surname, Email FROM Customers WHERE ";
             if (name.Trim() == "")
@@ -69,8 +79,32 @@ namespace CustomerSaleSYS
                 sqlQuery += " ORDER BY Forename";
             }
 
-            /*string sqlQuery = "SELECT CustomerID, Forename, Surname, Email FROM Customers " +
-                "WHERE Forename LIKE '%" + name + "%' ORDER BY Forename";*/
+            return Database.ExecuteMultiRowQuery(sqlQuery);
+        }
+
+        public static DataSet FindActiveCustomers(String name)
+        {
+            string sqlQuery = "SELECT CustomerID, Forename, Surname, Email FROM Customers WHERE ";
+            if (name.Trim() == "")
+            {
+                sqlQuery += "Status = 'A' AND Forename LIKE '%" + name + "%' ORDER BY Forename";
+            }
+            else
+            {
+                //https://learn.microsoft.com/en-us/dotnet/api/system.stringsplitoptions?view=net-10.0
+                string[] check = name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < check.Length; i++)
+                {
+                    check[i] = check[i].ToLower();
+                }
+                List<string> strings = new List<string>();
+                for (int i = 0; i < check.Length; i++)
+                {
+                    strings.Add($"Status = 'A' AND ((LOWER(Forename) LIKE '%{check[i]}%' OR LOWER(Surname) LIKE '%{check[i]}%'))");
+                }
+                sqlQuery += string.Join(" OR ", strings);
+                sqlQuery += " ORDER BY Forename";
+            }
 
             return Database.ExecuteMultiRowQuery(sqlQuery);
         }
@@ -83,7 +117,21 @@ namespace CustomerSaleSYS
                 FirstName + "','" +
                 LastName + "','" +
                 Phone + "','" +
-                Email + "')";
+                Email + "','" +
+                Status + "')";
+            Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public void UpdateCustomer()
+        {
+            string sqlQuery = "UPDATE Customers SET " + 
+                "CustomerID = " + Id + "," +
+                "Forename = '" + FirstName + "'," +
+                "Surname = '" + LastName + "'," +
+                "Phone = '" + Phone + "'," +
+                "Email = '" + Email + "'," +
+                "Status = '" + Status + "' " +
+                "WHERE CustomerID = " + Id;
             Database.ExecuteNonQuery(sqlQuery);
         }
 
@@ -99,6 +147,29 @@ namespace CustomerSaleSYS
                 nextId = dr.GetInt32(0) + 1;
             dr.Close() ;
             return nextId;
+        }
+
+        public static bool IsUniqEmail(String email)
+        {
+            string sqlQuery = "SELECT MAX(CustomerId) FROM Customers WHERE Email = '" + email + "'";
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
+            dr.Read();
+            if (dr.IsDBNull(0))
+            {
+                return true;
+            }
+            else
+                return false;
+
+            dr.Close();
+        }
+
+        public static char AddCboItem (char status)
+        {
+            if (status == 'A')
+            return 'I';
+            else 
+                return 'A';
         }
     }
 }

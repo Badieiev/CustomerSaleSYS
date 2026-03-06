@@ -17,9 +17,9 @@ namespace CustomerSaleSYS
             InitializeComponent();
         }
 
-        private void buttonCloseForm_Click(object sender, EventArgs e)
+        private void FormAddProductLoad(object sender, EventArgs e)
         {
-            this.Close();
+            textID.Text = Product.GetNextProductID().ToString("0000");
         }
 
         private void buttonAddProduct_Click(object sender, EventArgs e)
@@ -38,9 +38,22 @@ namespace CustomerSaleSYS
             }
             else
             {
+                if (!Product.IsUniqName(textName.Text))
+                {
+                    MessageBox.Show("This Product already exists in the system!");
+                    return;
+                }
+
+                Product aProduct = new Product(Convert.ToInt32(textID.Text), textName.Text, Convert.ToInt32(textQuantity.Text), Convert.ToDecimal(textPrice.Text));
+                aProduct.AddProduct();
                 MessageBox.Show("Product added");
                 this.Close();
             }
+        }
+
+        private void buttonCloseForm_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

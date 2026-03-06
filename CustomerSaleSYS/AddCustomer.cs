@@ -46,8 +46,14 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("Incorrect email format");
             }
-            else 
+            else
             {
+                if (!Customer.IsUniqEmail(textEmail.Text))
+                {
+                    MessageBox.Show("This Email already exists in the system!");
+                    return;
+                }
+
                 Customer aCustomer = new Customer(Convert.ToInt32(textID.Text), textName.Text, textSurname.Text, textPhone.Text, textEmail.Text);
                 aCustomer.AddCustomer();
                 MessageBox.Show("Customer added");

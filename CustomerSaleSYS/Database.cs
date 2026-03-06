@@ -1,16 +1,12 @@
 ﻿using Oracle.ManagedDataAccess.Client;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CustomerSaleSYS
 {
     internal class Database
     {
         public const string connectionString = "Data Source = localhost/orcl; User Id = C##andrii; Password = A104Oracle;";
+        //public const string connectionString = "Data Source = studentoracle:1521/orcl; User Id = tnnnnnnnn; Password = **********;";
 
         public static OracleConnection OpenConnection() {
             OracleConnection conn = new OracleConnection(Database.connectionString);

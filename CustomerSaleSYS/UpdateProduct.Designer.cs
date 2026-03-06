@@ -36,12 +36,15 @@
             this.labelQuantity = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.textName = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.buttonSearchProduct = new System.Windows.Forms.Button();
             this.labelSearchProduct = new System.Windows.Forms.Label();
             this.textSearchProduct = new System.Windows.Forms.TextBox();
-            this.labelProductId = new System.Windows.Forms.Label();
-            this.textProductId = new System.Windows.Forms.TextBox();
+            this.grdProducts = new System.Windows.Forms.DataGridView();
+            this.cboStatus = new System.Windows.Forms.ComboBox();
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.grpProduct = new System.Windows.Forms.GroupBox();
+            ((System.ComponentModel.ISupportInitialize)(this.grdProducts)).BeginInit();
+            this.grpProduct.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonCloseForm
@@ -58,97 +61,69 @@
             // buttonUpdateProduct
             // 
             this.buttonUpdateProduct.Font = new System.Drawing.Font("Corbel", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonUpdateProduct.Location = new System.Drawing.Point(590, 372);
+            this.buttonUpdateProduct.Location = new System.Drawing.Point(157, 251);
             this.buttonUpdateProduct.Name = "buttonUpdateProduct";
             this.buttonUpdateProduct.Size = new System.Drawing.Size(117, 23);
             this.buttonUpdateProduct.TabIndex = 26;
             this.buttonUpdateProduct.Text = "Update Product";
             this.buttonUpdateProduct.UseVisualStyleBackColor = true;
-            this.buttonUpdateProduct.Visible = false;
             this.buttonUpdateProduct.Click += new System.EventHandler(this.buttonUpdateProduct_Click);
             // 
             // textPrice
             // 
-            this.textPrice.Location = new System.Drawing.Point(551, 311);
+            this.textPrice.Location = new System.Drawing.Point(83, 150);
             this.textPrice.Name = "textPrice";
-            this.textPrice.Size = new System.Drawing.Size(191, 20);
+            this.textPrice.Size = new System.Drawing.Size(190, 20);
             this.textPrice.TabIndex = 25;
-            this.textPrice.Text = "3.30";
-            this.textPrice.Visible = false;
             // 
             // labelPrice
             // 
             this.labelPrice.AutoSize = true;
             this.labelPrice.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPrice.Location = new System.Drawing.Point(490, 311);
+            this.labelPrice.Location = new System.Drawing.Point(22, 150);
             this.labelPrice.Name = "labelPrice";
             this.labelPrice.Size = new System.Drawing.Size(55, 16);
             this.labelPrice.TabIndex = 24;
             this.labelPrice.Text = "Price:";
-            this.labelPrice.Visible = false;
             // 
             // textQuantity
             // 
-            this.textQuantity.Location = new System.Drawing.Point(551, 255);
+            this.textQuantity.Location = new System.Drawing.Point(83, 98);
             this.textQuantity.Name = "textQuantity";
-            this.textQuantity.Size = new System.Drawing.Size(191, 20);
+            this.textQuantity.Size = new System.Drawing.Size(190, 20);
             this.textQuantity.TabIndex = 23;
-            this.textQuantity.Text = "2";
-            this.textQuantity.Visible = false;
             // 
             // labelQuantity
             // 
             this.labelQuantity.AutoSize = true;
             this.labelQuantity.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelQuantity.Location = new System.Drawing.Point(466, 255);
+            this.labelQuantity.Location = new System.Drawing.Point(1, 100);
             this.labelQuantity.Name = "labelQuantity";
             this.labelQuantity.Size = new System.Drawing.Size(79, 16);
             this.labelQuantity.TabIndex = 22;
             this.labelQuantity.Text = "Quantity:";
-            this.labelQuantity.Visible = false;
             // 
             // labelName
             // 
             this.labelName.AutoSize = true;
             this.labelName.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelName.Location = new System.Drawing.Point(492, 201);
+            this.labelName.Location = new System.Drawing.Point(24, 43);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(55, 16);
             this.labelName.TabIndex = 21;
             this.labelName.Text = "Name: ";
-            this.labelName.Visible = false;
             // 
             // textName
             // 
-            this.textName.Location = new System.Drawing.Point(551, 201);
+            this.textName.Location = new System.Drawing.Point(83, 43);
             this.textName.Name = "textName";
-            this.textName.Size = new System.Drawing.Size(191, 20);
+            this.textName.Size = new System.Drawing.Size(190, 20);
             this.textName.TabIndex = 20;
-            this.textName.Text = "Product5";
-            this.textName.Visible = false;
-            // 
-            // listBox1
-            // 
-            this.listBox1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.HorizontalScrollbar = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Items.AddRange(new object[] {
-            "ID:1, Name:Product1, Quantity:100, Price:30.20",
-            "ID:2, Name:Product2, Quantity:12, Price:10.00",
-            "ID:3, Name:Product3, Quantity:20, Price:150.00",
-            "ID:4, Name:Product4, Quantity:40, Price:31.99",
-            "ID:5, Name:Product5, Quantity:2, Price:3.30"});
-            this.listBox1.Location = new System.Drawing.Point(32, 152);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(416, 228);
-            this.listBox1.TabIndex = 31;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // buttonSearchProduct
             // 
             this.buttonSearchProduct.Font = new System.Drawing.Font("Corbel", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonSearchProduct.Location = new System.Drawing.Point(331, 68);
+            this.buttonSearchProduct.Location = new System.Drawing.Point(510, 67);
             this.buttonSearchProduct.Name = "buttonSearchProduct";
             this.buttonSearchProduct.Size = new System.Drawing.Size(117, 23);
             this.buttonSearchProduct.TabIndex = 30;
@@ -162,60 +137,85 @@
             this.labelSearchProduct.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelSearchProduct.Location = new System.Drawing.Point(29, 71);
             this.labelSearchProduct.Name = "labelSearchProduct";
-            this.labelSearchProduct.Size = new System.Drawing.Size(71, 16);
+            this.labelSearchProduct.Size = new System.Drawing.Size(279, 16);
             this.labelSearchProduct.TabIndex = 29;
-            this.labelSearchProduct.Text = "Search: ";
+            this.labelSearchProduct.Text = "Enter product name or part of data";
             // 
             // textSearchProduct
             // 
-            this.textSearchProduct.Location = new System.Drawing.Point(106, 71);
+            this.textSearchProduct.Location = new System.Drawing.Point(314, 69);
             this.textSearchProduct.Name = "textSearchProduct";
-            this.textSearchProduct.Size = new System.Drawing.Size(191, 20);
+            this.textSearchProduct.Size = new System.Drawing.Size(190, 20);
             this.textSearchProduct.TabIndex = 28;
             // 
-            // labelProductId
+            // grdProducts
             // 
-            this.labelProductId.AutoSize = true;
-            this.labelProductId.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelProductId.Location = new System.Drawing.Point(506, 152);
-            this.labelProductId.Name = "labelProductId";
-            this.labelProductId.Size = new System.Drawing.Size(39, 16);
-            this.labelProductId.TabIndex = 33;
-            this.labelProductId.Text = "ID: ";
-            this.labelProductId.Visible = false;
+            this.grdProducts.AllowUserToAddRows = false;
+            this.grdProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdProducts.Location = new System.Drawing.Point(32, 146);
+            this.grdProducts.Name = "grdProducts";
+            this.grdProducts.Size = new System.Drawing.Size(450, 280);
+            this.grdProducts.TabIndex = 34;
+            this.grdProducts.Visible = false;
+            this.grdProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrdProductsCellClick);
             // 
-            // textProductId
+            // cboStatus
             // 
-            this.textProductId.Location = new System.Drawing.Point(551, 152);
-            this.textProductId.Name = "textProductId";
-            this.textProductId.ReadOnly = true;
-            this.textProductId.Size = new System.Drawing.Size(191, 20);
-            this.textProductId.TabIndex = 32;
-            this.textProductId.Text = "5";
-            this.textProductId.Visible = false;
+            this.cboStatus.FormattingEnabled = true;
+            this.cboStatus.Items.AddRange(new object[] {
+            "A",
+            "I"});
+            this.cboStatus.Location = new System.Drawing.Point(83, 198);
+            this.cboStatus.Name = "cboStatus";
+            this.cboStatus.Size = new System.Drawing.Size(121, 21);
+            this.cboStatus.TabIndex = 36;
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelStatus.Location = new System.Drawing.Point(8, 200);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(71, 16);
+            this.labelStatus.TabIndex = 35;
+            this.labelStatus.Text = "Status: ";
+            // 
+            // grpProduct
+            // 
+            this.grpProduct.Controls.Add(this.cboStatus);
+            this.grpProduct.Controls.Add(this.labelStatus);
+            this.grpProduct.Controls.Add(this.buttonUpdateProduct);
+            this.grpProduct.Controls.Add(this.textPrice);
+            this.grpProduct.Controls.Add(this.labelQuantity);
+            this.grpProduct.Controls.Add(this.labelPrice);
+            this.grpProduct.Controls.Add(this.textQuantity);
+            this.grpProduct.Controls.Add(this.labelName);
+            this.grpProduct.Controls.Add(this.textName);
+            this.grpProduct.Location = new System.Drawing.Point(492, 146);
+            this.grpProduct.Name = "grpProduct";
+            this.grpProduct.Size = new System.Drawing.Size(280, 280);
+            this.grpProduct.TabIndex = 37;
+            this.grpProduct.TabStop = false;
+            this.grpProduct.Text = "Update Product Details";
+            this.grpProduct.Visible = false;
             // 
             // UpdateProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 461);
-            this.Controls.Add(this.labelProductId);
-            this.Controls.Add(this.textProductId);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.grpProduct);
+            this.Controls.Add(this.grdProducts);
             this.Controls.Add(this.buttonSearchProduct);
             this.Controls.Add(this.labelSearchProduct);
             this.Controls.Add(this.textSearchProduct);
             this.Controls.Add(this.buttonCloseForm);
-            this.Controls.Add(this.buttonUpdateProduct);
-            this.Controls.Add(this.textPrice);
-            this.Controls.Add(this.labelPrice);
-            this.Controls.Add(this.textQuantity);
-            this.Controls.Add(this.labelQuantity);
-            this.Controls.Add(this.labelName);
-            this.Controls.Add(this.textName);
             this.Name = "UpdateProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UpdateProduct";
+            ((System.ComponentModel.ISupportInitialize)(this.grdProducts)).EndInit();
+            this.grpProduct.ResumeLayout(false);
+            this.grpProduct.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,11 +231,12 @@
         private System.Windows.Forms.Label labelQuantity;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.TextBox textName;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button buttonSearchProduct;
         private System.Windows.Forms.Label labelSearchProduct;
         private System.Windows.Forms.TextBox textSearchProduct;
-        private System.Windows.Forms.Label labelProductId;
-        private System.Windows.Forms.TextBox textProductId;
+        private System.Windows.Forms.DataGridView grdProducts;
+        private System.Windows.Forms.ComboBox cboStatus;
+        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.GroupBox grpProduct;
     }
 }
