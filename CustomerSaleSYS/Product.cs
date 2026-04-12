@@ -18,18 +18,18 @@ namespace CustomerSaleSYS
         public decimal Price { get; set; }
         public char Status { get; set; }
 
-        public Product (int iD, string name, int quantity, decimal price)
+        public Product (int id, string name, int quantity, decimal price)
         {
-            ID = iD;
+            ID = id;
             Name = name;
             Quantity = quantity;
             Price = price;
             Status = 'A';
         }
 
-        public Product(int iD, string name, int quantity, decimal price, char status)
+        public Product(int id, string name, int quantity, decimal price, char status)
         {
-            ID = iD;
+            ID = id;
             Name = name;
             Quantity = quantity;
             Price = price;
@@ -126,6 +126,46 @@ namespace CustomerSaleSYS
                 return 'I';
             else
                 return 'A';
+        }
+
+        public static DataSet GetProductName()
+        {
+            String sqlQuery = "SELECT ProductId, ProductName " +
+                                "FROM Products " +
+                                "WHERE Status LIKE 'A'";
+            return Database.ExecuteMultiRowQuery(sqlQuery);
+        }
+
+        public static int GetProductQuantity(int id)
+        {
+            string sqlQuery = "SELECT Quantity FROM Products " +
+                                "WHERE ProductId = " + id;
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
+            int quantity;
+            dr.Read();
+            quantity = dr.GetInt32(0);
+            dr.Close();
+            return quantity;
+        }
+
+        public static double GetProductPrice(int id)
+        {
+            string sqlQuery = "SELECT Price FROM Products " +
+                                "WHERE ProductId = " + id;
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
+            double price;
+            dr.Read();
+            price = dr.GetDouble(0);
+            dr.Close();
+            return price;
+        }
+
+        public static void UpdateProductQuantity(int id, int quantity)
+        {
+            string sqlQuery = "UPDATE Products SET " +
+                "Quantity = '" + quantity + "' " +
+                "WHERE ProductID = " + id;
+            Database.ExecuteNonQuery(sqlQuery);
         }
     }
 }

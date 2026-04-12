@@ -122,6 +122,8 @@
     <Compile Include="CustomerSaleSystem.Designer.cs">
       <DependentUpon>CustomerSaleSystem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Order.cs" />
+    <Compile Include="Order_item.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductAnalysis.cs">
       <SubType>Form</SubType>

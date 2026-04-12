@@ -171,5 +171,13 @@ namespace CustomerSaleSYS
             else 
                 return 'A';
         }
+
+        public static DataSet GetCustomerFullName()
+        {
+            String sqlQuery = "SELECT CustomerId, Forename, Surname " +
+                                "FROM Customers " +
+                                "WHERE Status LIKE 'A'";
+            return Database.ExecuteMultiRowQuery(sqlQuery);
+        }
     }
 }

@@ -1,6 +1,8 @@
 //CustomerSaleSys
-DROP TABLE Customers;
+DROP TABLE Order_items;
+DROP TABLE Orders;
 DROP TABLE Products;
+DROP TABLE Customers;
 
 PROMPT CREATING Table Customers
 CREATE TABLE Customers (
@@ -12,7 +14,6 @@ CREATE TABLE Customers (
     Status char(1),
     CONSTRAINT pk_Customers PRIMARY KEY (CustomerID)
 );
-//Email Uniq?
 
 PROMPT CREATING Table Products
 CREATE TABLE Products (
@@ -22,6 +23,29 @@ CREATE TABLE Products (
     Price number(10,2),
     Status char(1),
     CONSTRAINT pk_Products PRIMARY KEY (ProductID)
+);
+
+PROMPT CREATING Table Orders
+CREATE TABLE Orders (
+    OrderID number(4),
+    CustomerID number (4),
+    OrderDate DATE,
+    OrderSum number(10,2),
+    Status char(1),
+    CONSTRAINT pk_Orders PRIMARY KEY (OrderID),
+    CONSTRAINT fk_Orders_Customers FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+PROMPT CREATING Table Order_items
+CREATE TABLE Order_items (
+    OrderID number(4),
+    ProductID number(4),
+    Quantity number(10),
+    Cost number(10,2),
+    Status char(1),
+    CONSTRAINT pk_Order_items PRIMARY KEY (OrderID, ProductID),
+    CONSTRAINT fk_Order_items_Order FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    CONSTRAINT fk_Order_items_Products FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
 
 PROMPT POPULATING Table Customers
@@ -42,7 +66,7 @@ VALUES(1,'Product1', 20, 15.5,'A');
 INSERT INTO Products
 VALUES(2,'Product2', 22, 25.5,'A');
 INSERT INTO Products
-VALUES(3,'Product3', 10, 5.0,'A');
+VALUES(3,'Product3', 10, 5.0,'I');
 INSERT INTO Products
 VALUES(4,'Product4', 4, 1.5,'A');
 INSERT INTO Products
