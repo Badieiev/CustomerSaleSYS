@@ -96,9 +96,10 @@ namespace CustomerSaleSYS
             else
             {
                 int productID = int.Parse(cboProduct.SelectedValue.ToString());
-                if (Product.GetProductQuantity(productID) < int.Parse(textQuantity.Text))
+                if (Product.GetProductQuantity(productID) < Convert.ToInt32(textQuantity.Text))
                 {
                     MessageBox.Show("Unfortunately, the specified quantity is not available.");
+                    return;
                 }
 
                 foreach (DataGridViewRow row in grdOrderItems.Rows)
@@ -113,13 +114,13 @@ namespace CustomerSaleSYS
                     }
                 }
 
-                double productPrice = Product.GetProductPrice(productID);
+                decimal productPrice = Product.GetProductPrice(productID);
                 grdOrderItems.Rows.Add(productID.ToString(), textQuantity.Text, ((int.Parse(textQuantity.Text))*productPrice).ToString());
 
-                double total = 0;
+                decimal total = 0;
                 foreach (DataGridViewRow row in grdOrderItems.Rows)
                 {
-                    total += double.Parse(row.Cells[2].Value.ToString());
+                    total += decimal.Parse(row.Cells[2].Value.ToString());
                 }
                 textTotal.Text = total.ToString();
                 textQuantity.Clear();

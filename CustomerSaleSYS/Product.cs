@@ -75,7 +75,6 @@ namespace CustomerSaleSYS
             }
             else
                 return false;
-
             dr.Close();
         }
 
@@ -148,14 +147,14 @@ namespace CustomerSaleSYS
             return quantity;
         }
 
-        public static double GetProductPrice(int id)
+        public static decimal GetProductPrice(int id)
         {
             string sqlQuery = "SELECT Price FROM Products " +
                                 "WHERE ProductId = " + id;
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
-            double price;
+            decimal price;
             dr.Read();
-            price = dr.GetDouble(0);
+            price = dr.GetDecimal(0);
             dr.Close();
             return price;
         }

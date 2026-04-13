@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -34,7 +35,6 @@ namespace CustomerSaleSYS
             Status = status;
         }
 
-
         public void AddOrder_item()
         {
             Debug.WriteLine(this);//displaying state of the Customer object
@@ -52,6 +52,49 @@ namespace CustomerSaleSYS
             string sqlQuery = "SELECT OrderId, ProductId, Quantity, Cost FROM Order_items " +
                 "WHERE Status LIKE 'A' AND OrderId LIKE " + id;
             return Database.ExecuteMultiRowQuery(sqlQuery);
+        }
+
+        public static void UpdateOrder_itemStatus(int orderId, int productId)
+        {
+            string sqlQuery = "UPDATE Order_items SET " +
+                "Status = 'I' " +
+                "WHERE OrderId = " + orderId + " AND ProductId = " +productId;
+            Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public static void UpdateOrder_itemDetails(int orderId, int productId, int quantity, decimal cost)
+        {
+            string sqlQuery = "UPDATE Order_items SET " +
+                "Quantity = " + quantity + "," +
+                "Cost = '" + cost + "' " +
+                "WHERE OrderId = " + orderId + " AND ProductId = " + productId;
+            Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public static bool IsUniqOrder_item(int orderId, int productId)
+        {
+            string sqlQuery = "SELECT MAX(OrderId) FROM Order_items WHERE OrderId = " + orderId + " AND ProductId = " + productId;
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
+            dr.Read();
+            if (dr.IsDBNull(0))
+                return true;
+            else
+                return false;
+            dr.Close();
+        }
+
+        public static decimal GetOrderSum(int orderId)
+        {
+            string sqlQuery = "SELECT SUM(Cost) FROM Order_items WHERE Status = 'A' AND OrderId = " + orderId;
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
+            decimal sum;
+            dr.Read();
+            if (dr.IsDBNull(0))
+                sum=0;
+            else
+                sum =dr.GetDecimal(0);
+            dr.Close();
+            return sum;
         }
     }
 }

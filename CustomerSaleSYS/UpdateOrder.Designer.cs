@@ -47,9 +47,9 @@
             this.grpOrder = new System.Windows.Forms.GroupBox();
             this.btnUpdateOrder = new System.Windows.Forms.Button();
             this.grpProduct = new System.Windows.Forms.GroupBox();
-            this.btnDeleteOrder_item = new System.Windows.Forms.Button();
-            this.btnAddOrder_item = new System.Windows.Forms.Button();
             this.cboProduct = new System.Windows.Forms.ComboBox();
+            this.btnAddOrder_item = new System.Windows.Forms.Button();
+            this.btnDeleteOrder_item = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdOrder_items)).BeginInit();
             this.grpOrder.SuspendLayout();
@@ -227,7 +227,7 @@
             // btnUpdateOrder
             // 
             this.btnUpdateOrder.Font = new System.Drawing.Font("Corbel", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnUpdateOrder.Location = new System.Drawing.Point(623, 161);
+            this.btnUpdateOrder.Location = new System.Drawing.Point(659, 159);
             this.btnUpdateOrder.Name = "btnUpdateOrder";
             this.btnUpdateOrder.Size = new System.Drawing.Size(117, 23);
             this.btnUpdateOrder.TabIndex = 58;
@@ -252,15 +252,14 @@
             this.grpProduct.TabStop = false;
             this.grpProduct.Text = "Order_items Details: Update Product or Quantity";
             // 
-            // btnDeleteOrder_item
+            // cboProduct
             // 
-            this.btnDeleteOrder_item.Font = new System.Drawing.Font("Corbel", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDeleteOrder_item.Location = new System.Drawing.Point(511, 168);
-            this.btnDeleteOrder_item.Name = "btnDeleteOrder_item";
-            this.btnDeleteOrder_item.Size = new System.Drawing.Size(117, 23);
-            this.btnDeleteOrder_item.TabIndex = 58;
-            this.btnDeleteOrder_item.Text = "Delete";
-            this.btnDeleteOrder_item.UseVisualStyleBackColor = true;
+            this.cboProduct.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cboProduct.FormattingEnabled = true;
+            this.cboProduct.Location = new System.Drawing.Point(585, 25);
+            this.cboProduct.Name = "cboProduct";
+            this.cboProduct.Size = new System.Drawing.Size(191, 24);
+            this.cboProduct.TabIndex = 58;
             // 
             // btnAddOrder_item
             // 
@@ -271,15 +270,18 @@
             this.btnAddOrder_item.TabIndex = 59;
             this.btnAddOrder_item.Text = "Add";
             this.btnAddOrder_item.UseVisualStyleBackColor = true;
+            this.btnAddOrder_item.Click += new System.EventHandler(this.BtnAddOrder_item_Click);
             // 
-            // cboProduct
+            // btnDeleteOrder_item
             // 
-            this.cboProduct.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cboProduct.FormattingEnabled = true;
-            this.cboProduct.Location = new System.Drawing.Point(585, 25);
-            this.cboProduct.Name = "cboProduct";
-            this.cboProduct.Size = new System.Drawing.Size(191, 24);
-            this.cboProduct.TabIndex = 58;
+            this.btnDeleteOrder_item.Font = new System.Drawing.Font("Corbel", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDeleteOrder_item.Location = new System.Drawing.Point(511, 168);
+            this.btnDeleteOrder_item.Name = "btnDeleteOrder_item";
+            this.btnDeleteOrder_item.Size = new System.Drawing.Size(117, 23);
+            this.btnDeleteOrder_item.TabIndex = 58;
+            this.btnDeleteOrder_item.Text = "Delete";
+            this.btnDeleteOrder_item.UseVisualStyleBackColor = true;
+            this.btnDeleteOrder_item.Click += new System.EventHandler(this.BtnDeleteOrder_item_Click);
             // 
             // UpdateOrder
             // 

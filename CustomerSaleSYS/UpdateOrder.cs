@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CustomerSaleSYS
@@ -20,7 +14,6 @@ namespace CustomerSaleSYS
         private void FormUpdateOrderLoad(object sender, EventArgs e)
         {
             textOrderId.ReadOnly = true;
-
             DataSet dsCustomer = Customer.GetCustomerFullName();
             cboCustomer.Items.Clear();
             for (int i = 0; i < dsCustomer.Tables[0].Rows.Count; i++)
@@ -57,12 +50,6 @@ namespace CustomerSaleSYS
             {
                 grdOrders.DataSource = Order.FindOrderByID(Convert.ToInt32(textSearchOrder.Text)).Tables[0];
             }
-
-            //
-            if (grdOrders.Rows.Count == 0)
-            {
-                MessageBox.Show("No Data Found");
-            }
         }
 
         private void GrdOrdersCellClick(object sender, DataGridViewCellEventArgs e)
@@ -80,7 +67,6 @@ namespace CustomerSaleSYS
                     cboCustomer.SelectedItem = item;
                 }
             }
-
             grdOrder_items.DataSource = Order_item.FindOrder_itemsByID(orID).Tables[0];
         }
 
@@ -110,6 +96,7 @@ namespace CustomerSaleSYS
                             
                             Order.UpdateOrderCustomerDetails(orderID, customerID, date);
                             MessageBox.Show("Order updated");
+                            this.Close();
                         }
                     }
                 }
@@ -129,34 +116,155 @@ namespace CustomerSaleSYS
 
             int quantity = Convert.ToInt32(grdOrder_items.Rows[grdOrder_items.CurrentCell.RowIndex].Cells[2].Value);
             textQuantity.Text=quantity.ToString();
-            /*
-            int orID = Convert.ToInt32(grdOrders.Rows[grdOrders.CurrentCell.RowIndex].Cells[0].Value);
-            textProductId.Text = orID.ToString();
-            dateTimePicker.Value = (DateTime)grdOrders.Rows[grdOrders.CurrentCell.RowIndex].Cells[2].Value;
-            int custId = Convert.ToInt32(grdOrders.Rows[grdOrders.CurrentCell.RowIndex].Cells[1].Value);
-            foreach (string item in cboCustomer.Items)
-            {
-                if (custId == Convert.ToInt32(item.Split(' ')[0]))
-                {
-                    cboCustomer.SelectedItem = item;
-                }
-            }
+        }
 
-            grdOrder_items.DataSource = Order_item.FindOrder_itemsByID(orID).Tables[0];
-            */
+        private void BtnDeleteOrder_item_Click(object sender, EventArgs e)
+        {
+            if (cboProduct.SelectedItem == null || textQuantity.Text == "")
+            {
+                MessageBox.Show("Select an item from your order");
+            }
+            else if (grdOrder_items.Rows.Count == 1)
+            {
+                //
+                MessageBox.Show("It is not possible to remove the last item from the order.");
+                this.Close();
+            }
+            else if (Convert.ToInt32(grdOrder_items.Rows[grdOrder_items.CurrentCell.RowIndex].Cells[2].Value) != Convert.ToInt32(textQuantity.Text) ||
+                    Convert.ToInt32(grdOrder_items.Rows[grdOrder_items.CurrentCell.RowIndex].Cells[1].Value) != Convert.ToInt32(cboProduct.Text.Split(' ')[0]))
+            {
+                MessageBox.Show("The product or quantity of the product does not match the selected one");
+            }
+            else
+            {
+                int orderId = Convert.ToInt32(grdOrder_items.Rows[grdOrder_items.CurrentCell.RowIndex].Cells[0].Value);
+                int productId = Convert.ToInt32(grdOrder_items.Rows[grdOrder_items.CurrentCell.RowIndex].Cells[1].Value);
+                int quantity = Convert.ToInt32(grdOrder_items.Rows[grdOrder_items.CurrentCell.RowIndex].Cells[2].Value);
+                decimal cost = Convert.ToDecimal(grdOrder_items.Rows[grdOrder_items.CurrentCell.RowIndex].Cells[3].Value);
+
+                decimal total = Order.GetOrderSum(orderId);
+                Order.UpdateOrderSum(orderId, total - cost);
+
+                Order_item.UpdateOrder_itemStatus(orderId, productId);
+                Product.UpdateProductQuantity(productId, Product.GetProductQuantity(productId) + quantity);
+                MessageBox.Show("You have removed the selected product from order.");
+                this.Close();
+
+            }
+        }
+
+        private void BtnAddOrder_item_Click(object sender, EventArgs e)
+        {
+            if(textOrderId.Text == "")
+            {
+                MessageBox.Show("You haven't selected an order yet.");
+            }
+            else if (cboProduct.SelectedItem == null || textQuantity.Text == "")
+            {
+                MessageBox.Show("Select the product you want to add to your order and the quantity.");
+            }
+            else if (Product.GetProductQuantity(Convert.ToInt32(cboProduct.Text.Split(' ')[0])) < Convert.ToInt32(textQuantity.Text))
+            {
+                MessageBox.Show("Unfortunately, the specified quantity is not available.");
+            }
+            else if (!Order_item.IsUniqOrder_item(Convert.ToInt32(textOrderId.Text), Convert.ToInt32(cboProduct.Text.Split(' ')[0])))
+            {
+                MessageBox.Show("This order already contains this product, but with status I.");
+            }
+            else
+            {
+                int productId = Convert.ToInt32(cboProduct.Text.Split(' ')[0]);
+                foreach (DataGridViewRow row in grdOrder_items.Rows)
+                {
+                    if (grdOrder_items.Rows.Count > 0)
+                    {
+                        string productIDinGRD = row.Cells[0].Value.ToString();
+                        if (productId == Convert.ToInt32(productIDinGRD))
+                        {
+                            MessageBox.Show("It is not possible to add the same product multiple times.");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No Data Found");
+                        return;
+                    }
+                }
+
+                decimal productPrice = Product.GetProductPrice(productId);
+                int quantity = Convert.ToInt32(textQuantity.Text);
+                decimal cost = productPrice * quantity;
+                int orderId = Convert.ToInt32(textOrderId.Text);
+                decimal total = Order.GetOrderSum(orderId) + cost;
+                Order.UpdateOrderSum(orderId, total);
+
+                Order_item order_Item = new Order_item(orderId, productId, quantity, cost);
+                order_Item.AddOrder_item();
+                Product.UpdateProductQuantity(productId, Product.GetProductQuantity(productId) - quantity);
+
+                MessageBox.Show("You have added the product to order.");
+                this.Close();
+            }
+                
         }
 
         private void BtnUpdateOrder_item_Click(object sender, EventArgs e)
         {
-            //
-            if (cboCustomer.Text == "" || textQuantity.Text == "")
+            if (textOrderId.Text == "")
             {
-                MessageBox.Show("Fill in all fields");
+                MessageBox.Show("You haven't selected an order yet.");
+            }
+            else if (cboProduct.SelectedItem == null || textQuantity.Text == "")
+            {
+                MessageBox.Show("Select the product you want to change in order and quantity.");
             }
             else
             {
-                MessageBox.Show("Order_item updated");
-                this.Close();
+                bool checkProduct = false;
+                int grdQuantity =0;
+                decimal tableCost =0;
+                foreach (DataGridViewRow row in grdOrder_items.Rows)
+                {
+                    if (Convert.ToInt32(row.Cells[1].Value) == Convert.ToInt32(cboProduct.Text.Split(' ')[0]))
+                    {
+                        grdQuantity = Convert.ToInt32(row.Cells[2].Value);
+                        tableCost = Convert.ToDecimal(row.Cells[3].Value);
+                        checkProduct = true;
+                        break;
+                    }
+                }
+
+                if (checkProduct) 
+                {
+                    int orderId = Convert.ToInt32(textOrderId.Text);
+                    int productId = Convert.ToInt32(cboProduct.Text.Split(' ')[0]);
+                    int inputQuantity = Convert.ToInt32(textQuantity.Text);
+                    int stockQuantity = Product.GetProductQuantity(productId);
+                    decimal cost = Product.GetProductPrice(productId) * inputQuantity;
+
+                    if (grdQuantity == inputQuantity) 
+                    {
+                        MessageBox.Show("The quantity of product has not changed.");
+                    }
+                    else
+                    {
+                        if (stockQuantity < (inputQuantity - grdQuantity))
+                        {
+                            MessageBox.Show("Unfortunately, the specified quantity is not available.");
+                            return;
+                        }
+                        Product.UpdateProductQuantity(productId, stockQuantity + grdQuantity - inputQuantity);
+                        Order_item.UpdateOrder_itemDetails(orderId, productId, inputQuantity, cost);
+                        Order.UpdateOrderSum(orderId, Order_item.GetOrderSum(orderId));
+                        MessageBox.Show("The quantity of product in the order has been changed");
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("It is not possible to change the quantity of a product that is not included in the order.");
+                }
             }
         }
     }

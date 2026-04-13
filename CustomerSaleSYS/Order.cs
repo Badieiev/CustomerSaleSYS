@@ -37,10 +37,6 @@ namespace CustomerSaleSYS
             Status = status;
         }
 
-
-
-
-
         public static int GetNextOrderID()
         {
             string sqlQuery = "SELECT MAX(OrderId) FROM Orders";
@@ -69,7 +65,7 @@ namespace CustomerSaleSYS
 
         public static DataSet FindAllOrders()
         {
-            string sqlQuery = "SELECT OrderId, CustomerId, OrderDate, OrderSum FROM Orders WHERE Status LIKE 'A'";
+            string sqlQuery = "SELECT OrderId, CustomerId, OrderDate, OrderSum FROM Orders WHERE Status LIKE 'A' ORDER BY OrderId";
             return Database.ExecuteMultiRowQuery(sqlQuery);
         }
 
@@ -87,6 +83,50 @@ namespace CustomerSaleSYS
                 "CustomerId = " + custID + "," +
                 "OrderDate = '" + date + "' " +
                 "WHERE OrderId = " + id;
+            Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public static decimal GetOrderSum(int id)
+        {
+            string sqlQuery = "SELECT OrderSum FROM Orders " +
+                                "WHERE OrderId = " + id;
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
+            decimal sum;
+            dr.Read();
+            sum = dr.GetDecimal(0);
+            dr.Close();
+            return sum;
+        }
+
+        public static void UpdateOrderSum(int id, decimal sum)
+        {
+            string sqlQuery = "UPDATE Orders SET " +
+                "OrderSum = " + sum + " " +
+                "WHERE OrderId = " + id;
+            Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public static DataSet FindAllOrdersFullInfo()
+        {
+            string sqlQuery = "SELECT o.OrderId, c.Forename || ' ' || c.Surname AS Customer, o.OrderDate, o.OrderSum " +
+                              "FROM Orders o JOIN Customers c ON o.CustomerId = c.CustomerId " +
+                              "WHERE o.Status LIKE 'A' ORDER BY o.OrderId";
+            return Database.ExecuteMultiRowQuery(sqlQuery);
+        }
+
+        public static DataSet FindOrderFullInfoByID(int id)
+        {
+            string sqlQuery = "SELECT o.OrderId, c.Forename || ' ' || c.Surname AS Customer, o.OrderDate, o.OrderSum " +
+                              "FROM Orders o JOIN Customers c ON o.CustomerId = c.CustomerId " +
+                              "WHERE o.Status LIKE 'A' AND o.OrderId = " + id;
+            return Database.ExecuteMultiRowQuery(sqlQuery);
+        }
+
+        public static void UpdateOrderStatus(int orderId)
+        {
+            string sqlQuery = "UPDATE Orders SET " +
+                "Status = 'I' " +
+                "WHERE OrderId = " + orderId;
             Database.ExecuteNonQuery(sqlQuery);
         }
     }

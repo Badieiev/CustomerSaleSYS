@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CustomerSaleSYS
@@ -17,39 +10,49 @@ namespace CustomerSaleSYS
             InitializeComponent();
         }
 
-        private void buttonCloseForm_Click(object sender, EventArgs e)
+        private void ButtonCloseForm_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void buttonSearchCustomer_Click(object sender, EventArgs e)
+        private void ButtonSearchCustomer_Click(object sender, EventArgs e)
         {
-            if (textSearchCustomer.Text == "")
+            if (textSearchOrder.Text.Trim() == "")
             {
-                MessageBox.Show("Fill in the search field");
+                grdOrders.DataSource = Order.FindAllOrdersFullInfo().Tables[0];
             }
-            else
+            else if (!Validation.IsValidQuantity(textSearchOrder.Text))
             {
-                labelProductId.Visible = true;
-                textProductId.Visible = true;
-                labelCustomer.Visible = true;
-                comboCustomer.Visible = true;
-                labelProduct.Visible = true;
-                comboProduct.Visible = true;
-                labelQuantity.Visible = true;
-                textQuantity.Visible = true;
-                labelDate.Visible = true;
-                dateTimePicker1.Visible = true;
-                labelSum.Visible = true;
-                textSum.Visible = true;
-                labelStatus.Visible = true;
-                comboBoxStatus.Visible = true;
-                buttonDeleteOrder.Visible = true;
+                MessageBox.Show("Incorrect data entered in the ID field.");
             }
+            else 
+            {
+                grdOrders.DataSource = Order.FindOrderFullInfoByID(Convert.ToInt32(textSearchOrder.Text)).Tables[0];
+            }
+            textOrderId.Clear();
+            textCustomer.Clear();
+            dateTimePicker.Value = DateTime.Now;
+            textSum.Clear();    
         }
 
-        private void buttonDeleteOrder_Click(object sender, EventArgs e)
+        private void GrdOrdersCellClick(object sender, DataGridViewCellEventArgs e)
         {
+            int orID = Convert.ToInt32(grdOrders.Rows[grdOrders.CurrentCell.RowIndex].Cells[0].Value);
+            textOrderId.Text = orID.ToString();
+            textCustomer.Text = Convert.ToString(grdOrders.Rows[grdOrders.CurrentCell.RowIndex].Cells[1].Value);
+            dateTimePicker.Value = (DateTime)grdOrders.Rows[grdOrders.CurrentCell.RowIndex].Cells[2].Value;
+            decimal orSum = Convert.ToDecimal(grdOrders.Rows[grdOrders.CurrentCell.RowIndex].Cells[3].Value);
+            textSum.Text = orSum.ToString();
+        }
+
+        private void ButtonDeleteOrder_Click(object sender, EventArgs e)
+        {
+            if (textOrderId.Text == "")
+            {
+                MessageBox.Show("Select the order you want to delete.");
+                return;
+            }
+            Order.UpdateOrderStatus(Convert.ToInt32(textOrderId.Text));
             MessageBox.Show("Order deleted");
             this.Close();
         }
