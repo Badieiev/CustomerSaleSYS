@@ -65,23 +65,23 @@ namespace CustomerSaleSYS
 
         public static DataSet FindAllOrders()
         {
-            string sqlQuery = "SELECT OrderId, CustomerId, OrderDate, OrderSum FROM Orders WHERE Status LIKE 'A' ORDER BY OrderId";
+            string sqlQuery = "SELECT * FROM Orders ORDER BY OrderId";
             return Database.ExecuteMultiRowQuery(sqlQuery);
         }
 
         public static DataSet FindOrderByID(int id)
         {
-            string sqlQuery = "SELECT OrderId, CustomerId, OrderDate, OrderSum FROM Orders " +
-                "WHERE OrderId LIKE '%" + id + "%' AND Status LIKE 'A'";
+            string sqlQuery = "SELECT * FROM Orders " +
+                "WHERE OrderId = " + id;
             return Database.ExecuteMultiRowQuery(sqlQuery);
         }
 
-        //update order using an object or direct sql?
-        public static void UpdateOrderCustomerDetails(int id, int custID, string date)
+        public static void UpdateOrderDetails(int id, int custID, string date, char x)
         {
             string sqlQuery = "UPDATE Orders SET " +
-                "CustomerId = " + custID + "," +
-                "OrderDate = '" + date + "' " +
+                "CustomerId = " + custID + ", " +
+                "OrderDate = '" + date + "'," +
+                "Status = '" + x + "' " +
                 "WHERE OrderId = " + id;
             Database.ExecuteNonQuery(sqlQuery);
         }
@@ -122,12 +122,33 @@ namespace CustomerSaleSYS
             return Database.ExecuteMultiRowQuery(sqlQuery);
         }
 
-        public static void UpdateOrderStatus(int orderId)
+        public static void UpdateOrderStatus(int orderId, char x)
         {
             string sqlQuery = "UPDATE Orders SET " +
-                "Status = 'I' " +
-                "WHERE OrderId = " + orderId;
+                "Status = '" + x + "' WHERE OrderId = " + orderId;
             Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public static Order GetOrder(int id)
+        {
+            string sqlQuery = "SELECT * FROM Orders WHERE OrderId = " + id;
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
+            dr.Read();
+            int cusomerId = dr.GetInt32(1);
+            string date = dr.GetString(2);
+            decimal sum = dr.GetDecimal(3);
+            char status = dr.GetString(4)[0];
+            dr.Close();
+
+            return new Order(id, cusomerId, date, sum, status);
+        }
+
+        public static char AddCboItem(char status)
+        {
+            if (status == 'A')
+                return 'I';
+            else
+                return 'A';
         }
     }
 }

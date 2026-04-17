@@ -28,6 +28,7 @@ namespace CustomerSaleSYS
                 textSearchProduct.Focus();
                 return;
             }
+            textId.Enabled = false;
             grdProducts.Visible = true;
         }
 
@@ -35,6 +36,7 @@ namespace CustomerSaleSYS
         {
             int id = Convert.ToInt32(grdProducts.Rows[grdProducts.CurrentCell.RowIndex].Cells[0].Value);
             product = Product.GetProduct(id);
+            textId.Text = product.ID.ToString();
             textName.Text = product.Name;
             textQuantity.Text = product.Quantity.ToString("000");
             textPrice.Text = product.Price.ToString("###0.00");
@@ -46,11 +48,17 @@ namespace CustomerSaleSYS
             {
                 cboStatus.Visible = false;
                 labelStatus.Visible = false;
+                textName.Enabled = true;
+                textQuantity.Enabled = true;
+                textPrice.Enabled = true;
             }
             else
             {
                 cboStatus.Visible = true;
                 labelStatus.Visible = true;
+                textName.Enabled = false;
+                textQuantity.Enabled = false;
+                textPrice.Enabled = false;
             }
             grpProduct.Visible = true;
         }
@@ -69,9 +77,12 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("Incorrect data entered in the price field.");
             }
+            else if (!Product.IsUniqNameForUpdate(Convert.ToInt32(textId.Text), textName.Text))
+            {
+                MessageBox.Show("Update not possible. A product with this name already exists in the database.");
+            }
             else
             {
-                //check name
                 product.Name = textName.Text;
                 product.Quantity = Convert.ToInt32(textQuantity.Text);
                 product.Price = Convert.ToDecimal(textPrice.Text);

@@ -52,7 +52,7 @@ namespace CustomerSaleSYS
                 MessageBox.Show("Select the order you want to delete.");
                 return;
             }
-            Order.UpdateOrderStatus(Convert.ToInt32(textOrderId.Text));
+            Order.UpdateOrderStatus(Convert.ToInt32(textOrderId.Text), 'I');
             MessageBox.Show("Order deleted");
             this.Close();
         }

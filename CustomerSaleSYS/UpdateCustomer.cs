@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CustomerSaleSYS
 {
@@ -29,12 +30,14 @@ namespace CustomerSaleSYS
                 return;
             }
             grdCustomers.Visible = true;
+            textId.Enabled = false;
         }
 
         private void GrdCustomersCellClick(object sender, DataGridViewCellEventArgs e)
         {
             int id = Convert.ToInt32(grdCustomers.Rows[grdCustomers.CurrentCell.RowIndex].Cells[0].Value);
             customer = Customer.GetCustomer(id);
+            textId.Text = customer.Id.ToString();
             textName.Text = customer.FirstName;
             textSurname.Text = customer.LastName;
             textPhone.Text = customer.Phone;
@@ -47,11 +50,19 @@ namespace CustomerSaleSYS
             {
                 cboStatus.Visible = false;
                 labelStatus.Visible = false;
+                textName.Enabled = true;
+                textSurname.Enabled = true;
+                textPhone.Enabled = true;
+                textEmail.Enabled = true;
             }
             else
             {
                 cboStatus.Visible = true;
                 labelStatus.Visible = true;
+                textName.Enabled = false;
+                textSurname.Enabled = false;
+                textPhone.Enabled = false;
+                textEmail.Enabled = false;
             }
             grpCustomer.Visible = true;
         }
@@ -78,13 +89,12 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("Incorrect email format");
             }
-            else if (!Validation.IsValidStatus(cboStatus.Text[0]))
+            else if (!Customer.IsUniqEmailForUpdate(Convert.ToInt32(textId.Text), textEmail.Text))
             {
-                MessageBox.Show("Incorrect status");
+                MessageBox.Show("Update not possible. A user with this email address already exists in the database.");
             }
             else
             {
-                //check email
                 customer.FirstName = textName.Text;
                 customer.LastName = textSurname.Text;
                 customer.Phone = textPhone.Text;

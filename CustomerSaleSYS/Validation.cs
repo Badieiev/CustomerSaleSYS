@@ -80,13 +80,5 @@ namespace CustomerSaleSYS
                 return false;
             }
         }
-
-        public static bool IsValidStatus(char c)
-        {
-            if ( c == 'A' ||  c == 'I')
-                { return true; }
-            else 
-                return false;
-        }
     }
 }

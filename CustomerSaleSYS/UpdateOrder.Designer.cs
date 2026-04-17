@@ -50,6 +50,10 @@
             this.cboProduct = new System.Windows.Forms.ComboBox();
             this.btnAddOrder_item = new System.Windows.Forms.Button();
             this.btnDeleteOrder_item = new System.Windows.Forms.Button();
+            this.cboProductStatus = new System.Windows.Forms.ComboBox();
+            this.labelProductStatus = new System.Windows.Forms.Label();
+            this.labelOrderStatus = new System.Windows.Forms.Label();
+            this.cboOrderStatus = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdOrder_items)).BeginInit();
             this.grpOrder.SuspendLayout();
@@ -60,7 +64,7 @@
             // 
             this.labelProduct.AutoSize = true;
             this.labelProduct.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelProduct.Location = new System.Drawing.Point(508, 28);
+            this.labelProduct.Location = new System.Drawing.Point(517, 20);
             this.labelProduct.Name = "labelProduct";
             this.labelProduct.Size = new System.Drawing.Size(71, 16);
             this.labelProduct.TabIndex = 43;
@@ -70,7 +74,7 @@
             // 
             this.labelCustomer.AutoSize = true;
             this.labelCustomer.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCustomer.Location = new System.Drawing.Point(502, 65);
+            this.labelCustomer.Location = new System.Drawing.Point(510, 58);
             this.labelCustomer.Name = "labelCustomer";
             this.labelCustomer.Size = new System.Drawing.Size(79, 16);
             this.labelCustomer.TabIndex = 42;
@@ -80,14 +84,14 @@
             // 
             this.cboCustomer.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cboCustomer.FormattingEnabled = true;
-            this.cboCustomer.Location = new System.Drawing.Point(587, 62);
+            this.cboCustomer.Location = new System.Drawing.Point(595, 55);
             this.cboCustomer.Name = "cboCustomer";
             this.cboCustomer.Size = new System.Drawing.Size(191, 24);
             this.cboCustomer.TabIndex = 41;
             // 
             // dateTimePicker
             // 
-            this.dateTimePicker.Location = new System.Drawing.Point(587, 106);
+            this.dateTimePicker.Location = new System.Drawing.Point(595, 96);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(191, 20);
             this.dateTimePicker.TabIndex = 39;
@@ -106,7 +110,7 @@
             // btnUpdateOrder_item
             // 
             this.btnUpdateOrder_item.Font = new System.Drawing.Font("Corbel", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnUpdateOrder_item.Location = new System.Drawing.Point(659, 168);
+            this.btnUpdateOrder_item.Location = new System.Drawing.Point(668, 171);
             this.btnUpdateOrder_item.Name = "btnUpdateOrder_item";
             this.btnUpdateOrder_item.Size = new System.Drawing.Size(117, 23);
             this.btnUpdateOrder_item.TabIndex = 37;
@@ -118,7 +122,7 @@
             // 
             this.labelDate.AutoSize = true;
             this.labelDate.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDate.Location = new System.Drawing.Point(534, 110);
+            this.labelDate.Location = new System.Drawing.Point(542, 100);
             this.labelDate.Name = "labelDate";
             this.labelDate.Size = new System.Drawing.Size(47, 16);
             this.labelDate.TabIndex = 36;
@@ -126,7 +130,7 @@
             // 
             // textQuantity
             // 
-            this.textQuantity.Location = new System.Drawing.Point(585, 72);
+            this.textQuantity.Location = new System.Drawing.Point(594, 60);
             this.textQuantity.Name = "textQuantity";
             this.textQuantity.Size = new System.Drawing.Size(191, 20);
             this.textQuantity.TabIndex = 35;
@@ -135,7 +139,7 @@
             // 
             this.labelQuantity.AutoSize = true;
             this.labelQuantity.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelQuantity.Location = new System.Drawing.Point(500, 72);
+            this.labelQuantity.Location = new System.Drawing.Point(509, 60);
             this.labelQuantity.Name = "labelQuantity";
             this.labelQuantity.Size = new System.Drawing.Size(79, 16);
             this.labelQuantity.TabIndex = 34;
@@ -173,7 +177,7 @@
             // 
             this.labelProductId.AutoSize = true;
             this.labelProductId.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelProductId.Location = new System.Drawing.Point(542, 25);
+            this.labelProductId.Location = new System.Drawing.Point(550, 19);
             this.labelProductId.Name = "labelProductId";
             this.labelProductId.Size = new System.Drawing.Size(39, 16);
             this.labelProductId.TabIndex = 49;
@@ -181,7 +185,7 @@
             // 
             // textOrderId
             // 
-            this.textOrderId.Location = new System.Drawing.Point(587, 25);
+            this.textOrderId.Location = new System.Drawing.Point(595, 19);
             this.textOrderId.Name = "textOrderId";
             this.textOrderId.ReadOnly = true;
             this.textOrderId.Size = new System.Drawing.Size(191, 20);
@@ -193,7 +197,7 @@
             this.grdOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdOrders.Location = new System.Drawing.Point(2, 17);
             this.grdOrders.Name = "grdOrders";
-            this.grdOrders.Size = new System.Drawing.Size(440, 180);
+            this.grdOrders.Size = new System.Drawing.Size(500, 180);
             this.grdOrders.TabIndex = 54;
             this.grdOrders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrdOrdersCellClick);
             // 
@@ -203,13 +207,15 @@
             this.grdOrder_items.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdOrder_items.Location = new System.Drawing.Point(2, 17);
             this.grdOrder_items.Name = "grdOrder_items";
-            this.grdOrder_items.Size = new System.Drawing.Size(440, 180);
+            this.grdOrder_items.Size = new System.Drawing.Size(500, 180);
             this.grdOrder_items.TabIndex = 55;
             this.grdOrder_items.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrdOrder_itemsCellClick);
             // 
             // grpOrder
             // 
+            this.grpOrder.Controls.Add(this.labelOrderStatus);
             this.grpOrder.Controls.Add(this.btnUpdateOrder);
+            this.grpOrder.Controls.Add(this.cboOrderStatus);
             this.grpOrder.Controls.Add(this.grdOrders);
             this.grpOrder.Controls.Add(this.labelProductId);
             this.grpOrder.Controls.Add(this.textOrderId);
@@ -217,9 +223,9 @@
             this.grpOrder.Controls.Add(this.cboCustomer);
             this.grpOrder.Controls.Add(this.dateTimePicker);
             this.grpOrder.Controls.Add(this.labelDate);
-            this.grpOrder.Location = new System.Drawing.Point(12, 40);
+            this.grpOrder.Location = new System.Drawing.Point(4, 40);
             this.grpOrder.Name = "grpOrder";
-            this.grpOrder.Size = new System.Drawing.Size(785, 200);
+            this.grpOrder.Size = new System.Drawing.Size(790, 200);
             this.grpOrder.TabIndex = 56;
             this.grpOrder.TabStop = false;
             this.grpOrder.Text = "Order Details: Update Customer or Date";
@@ -227,7 +233,7 @@
             // btnUpdateOrder
             // 
             this.btnUpdateOrder.Font = new System.Drawing.Font("Corbel", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnUpdateOrder.Location = new System.Drawing.Point(659, 159);
+            this.btnUpdateOrder.Location = new System.Drawing.Point(667, 169);
             this.btnUpdateOrder.Name = "btnUpdateOrder";
             this.btnUpdateOrder.Size = new System.Drawing.Size(117, 23);
             this.btnUpdateOrder.TabIndex = 58;
@@ -237,6 +243,8 @@
             // 
             // grpProduct
             // 
+            this.grpProduct.Controls.Add(this.labelProductStatus);
+            this.grpProduct.Controls.Add(this.cboProductStatus);
             this.grpProduct.Controls.Add(this.cboProduct);
             this.grpProduct.Controls.Add(this.btnAddOrder_item);
             this.grpProduct.Controls.Add(this.btnDeleteOrder_item);
@@ -245,9 +253,9 @@
             this.grpProduct.Controls.Add(this.btnUpdateOrder_item);
             this.grpProduct.Controls.Add(this.textQuantity);
             this.grpProduct.Controls.Add(this.labelQuantity);
-            this.grpProduct.Location = new System.Drawing.Point(12, 247);
+            this.grpProduct.Location = new System.Drawing.Point(5, 247);
             this.grpProduct.Name = "grpProduct";
-            this.grpProduct.Size = new System.Drawing.Size(785, 200);
+            this.grpProduct.Size = new System.Drawing.Size(790, 200);
             this.grpProduct.TabIndex = 57;
             this.grpProduct.TabStop = false;
             this.grpProduct.Text = "Order_items Details: Update Product or Quantity";
@@ -256,7 +264,7 @@
             // 
             this.cboProduct.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cboProduct.FormattingEnabled = true;
-            this.cboProduct.Location = new System.Drawing.Point(585, 25);
+            this.cboProduct.Location = new System.Drawing.Point(594, 17);
             this.cboProduct.Name = "cboProduct";
             this.cboProduct.Size = new System.Drawing.Size(191, 24);
             this.cboProduct.TabIndex = 58;
@@ -264,7 +272,7 @@
             // btnAddOrder_item
             // 
             this.btnAddOrder_item.Font = new System.Drawing.Font("Corbel", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnAddOrder_item.Location = new System.Drawing.Point(659, 124);
+            this.btnAddOrder_item.Location = new System.Drawing.Point(520, 131);
             this.btnAddOrder_item.Name = "btnAddOrder_item";
             this.btnAddOrder_item.Size = new System.Drawing.Size(117, 23);
             this.btnAddOrder_item.TabIndex = 59;
@@ -275,13 +283,51 @@
             // btnDeleteOrder_item
             // 
             this.btnDeleteOrder_item.Font = new System.Drawing.Font("Corbel", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDeleteOrder_item.Location = new System.Drawing.Point(511, 168);
+            this.btnDeleteOrder_item.Location = new System.Drawing.Point(520, 171);
             this.btnDeleteOrder_item.Name = "btnDeleteOrder_item";
             this.btnDeleteOrder_item.Size = new System.Drawing.Size(117, 23);
             this.btnDeleteOrder_item.TabIndex = 58;
             this.btnDeleteOrder_item.Text = "Delete";
             this.btnDeleteOrder_item.UseVisualStyleBackColor = true;
             this.btnDeleteOrder_item.Click += new System.EventHandler(this.BtnDeleteOrder_item_Click);
+            // 
+            // cboProductStatus
+            // 
+            this.cboProductStatus.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cboProductStatus.FormattingEnabled = true;
+            this.cboProductStatus.Location = new System.Drawing.Point(594, 99);
+            this.cboProductStatus.Name = "cboProductStatus";
+            this.cboProductStatus.Size = new System.Drawing.Size(191, 24);
+            this.cboProductStatus.TabIndex = 59;
+            // 
+            // labelProductStatus
+            // 
+            this.labelProductStatus.AutoSize = true;
+            this.labelProductStatus.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelProductStatus.Location = new System.Drawing.Point(519, 102);
+            this.labelProductStatus.Name = "labelProductStatus";
+            this.labelProductStatus.Size = new System.Drawing.Size(63, 16);
+            this.labelProductStatus.TabIndex = 58;
+            this.labelProductStatus.Text = "Status:";
+            // 
+            // labelOrderStatus
+            // 
+            this.labelOrderStatus.AutoSize = true;
+            this.labelOrderStatus.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelOrderStatus.Location = new System.Drawing.Point(520, 133);
+            this.labelOrderStatus.Name = "labelOrderStatus";
+            this.labelOrderStatus.Size = new System.Drawing.Size(63, 16);
+            this.labelOrderStatus.TabIndex = 60;
+            this.labelOrderStatus.Text = "Status:";
+            // 
+            // cboOrderStatus
+            // 
+            this.cboOrderStatus.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cboOrderStatus.FormattingEnabled = true;
+            this.cboOrderStatus.Location = new System.Drawing.Point(595, 130);
+            this.cboOrderStatus.Name = "cboOrderStatus";
+            this.cboOrderStatus.Size = new System.Drawing.Size(191, 24);
+            this.cboOrderStatus.TabIndex = 61;
             // 
             // UpdateOrder
             // 
@@ -333,5 +379,9 @@
         private System.Windows.Forms.Button btnDeleteOrder_item;
         private System.Windows.Forms.Button btnAddOrder_item;
         private System.Windows.Forms.ComboBox cboProduct;
+        private System.Windows.Forms.Label labelProductStatus;
+        private System.Windows.Forms.ComboBox cboProductStatus;
+        private System.Windows.Forms.Label labelOrderStatus;
+        private System.Windows.Forms.ComboBox cboOrderStatus;
     }
 }

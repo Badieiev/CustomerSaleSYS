@@ -151,10 +151,10 @@ namespace CustomerSaleSYS
 
         public static bool IsUniqEmail(String email)
         {
-            string sqlQuery = "SELECT MAX(CustomerId) FROM Customers WHERE Email = '" + email + "'";
+            string sqlQuery = "SELECT COUNT(CustomerId) FROM Customers WHERE Email = '" + email + "'";
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
             dr.Read();
-            if (dr.IsDBNull(0))
+            if (dr.GetInt32(0) == 0)
             {
                 return true;
             }
@@ -178,6 +178,20 @@ namespace CustomerSaleSYS
                                 "FROM Customers " +
                                 "WHERE Status LIKE 'A'";
             return Database.ExecuteMultiRowQuery(sqlQuery);
+        }
+
+        public static bool IsUniqEmailForUpdate(int id, String email)
+        {
+            string sqlQuery = "SELECT COUNT(CustomerId) FROM Customers WHERE Email = '" + email + "' AND CustomerId = " + id;
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
+            dr.Read();
+            if (dr.GetInt32(0) == 1)
+            {
+                return true;
+            }
+            else
+                return false;
+            dr.Close();
         }
     }
 }

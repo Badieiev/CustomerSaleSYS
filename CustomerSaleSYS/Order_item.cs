@@ -49,15 +49,15 @@ namespace CustomerSaleSYS
 
         public static DataSet FindOrder_itemsByID(int id)
         {
-            string sqlQuery = "SELECT OrderId, ProductId, Quantity, Cost FROM Order_items " +
-                "WHERE Status LIKE 'A' AND OrderId LIKE " + id;
+            string sqlQuery = "SELECT * FROM Order_items " +
+                              "WHERE OrderId LIKE " + id;
             return Database.ExecuteMultiRowQuery(sqlQuery);
         }
 
-        public static void UpdateOrder_itemStatus(int orderId, int productId)
+        public static void UpdateOrder_itemStatus(int orderId, int productId, char x)
         {
             string sqlQuery = "UPDATE Order_items SET " +
-                "Status = 'I' " +
+                "Status = '" + x + "' " +
                 "WHERE OrderId = " + orderId + " AND ProductId = " +productId;
             Database.ExecuteNonQuery(sqlQuery);
         }
@@ -95,6 +95,28 @@ namespace CustomerSaleSYS
                 sum =dr.GetDecimal(0);
             dr.Close();
             return sum;
+        }
+
+        public static char AddCboItem(char status)
+        {
+            if (status == 'A')
+                return 'I';
+            else
+                return 'A';
+        }
+
+        public static int CountActiveOrder_Items(int id)
+        {
+            string sqlQuery = "SELECT COUNT(Status) FROM Order_items WHERE Status LIKE 'A' AND OrderId = " + id;
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
+            int num;
+            dr.Read();
+            if (dr.IsDBNull(0))
+                num = 0;
+            else
+                num = dr.GetInt32(0);
+            dr.Close();
+            return num;
         }
     }
 }

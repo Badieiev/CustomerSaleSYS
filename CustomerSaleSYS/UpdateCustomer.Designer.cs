@@ -45,6 +45,8 @@
             this.cboStatus = new System.Windows.Forms.ComboBox();
             this.labelStatus = new System.Windows.Forms.Label();
             this.grdCustomers = new System.Windows.Forms.DataGridView();
+            this.labelId = new System.Windows.Forms.Label();
+            this.textId = new System.Windows.Forms.TextBox();
             this.grpCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdCustomers)).BeginInit();
             this.SuspendLayout();
@@ -90,7 +92,7 @@
             // 
             // textName
             // 
-            this.textName.Location = new System.Drawing.Point(89, 32);
+            this.textName.Location = new System.Drawing.Point(89, 60);
             this.textName.Name = "textName";
             this.textName.Size = new System.Drawing.Size(190, 20);
             this.textName.TabIndex = 10;
@@ -99,7 +101,7 @@
             // 
             this.labelName.AutoSize = true;
             this.labelName.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelName.Location = new System.Drawing.Point(30, 33);
+            this.labelName.Location = new System.Drawing.Point(30, 61);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(55, 16);
             this.labelName.TabIndex = 11;
@@ -109,7 +111,7 @@
             // 
             this.labelSurname.AutoSize = true;
             this.labelSurname.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSurname.Location = new System.Drawing.Point(12, 78);
+            this.labelSurname.Location = new System.Drawing.Point(12, 99);
             this.labelSurname.Name = "labelSurname";
             this.labelSurname.Size = new System.Drawing.Size(71, 16);
             this.labelSurname.TabIndex = 12;
@@ -117,7 +119,7 @@
             // 
             // textSurname
             // 
-            this.textSurname.Location = new System.Drawing.Point(89, 77);
+            this.textSurname.Location = new System.Drawing.Point(89, 98);
             this.textSurname.Name = "textSurname";
             this.textSurname.Size = new System.Drawing.Size(190, 20);
             this.textSurname.TabIndex = 13;
@@ -126,7 +128,7 @@
             // 
             this.labelPhone.AutoSize = true;
             this.labelPhone.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPhone.Location = new System.Drawing.Point(28, 126);
+            this.labelPhone.Location = new System.Drawing.Point(28, 139);
             this.labelPhone.Name = "labelPhone";
             this.labelPhone.Size = new System.Drawing.Size(55, 16);
             this.labelPhone.TabIndex = 14;
@@ -134,7 +136,7 @@
             // 
             // textPhone
             // 
-            this.textPhone.Location = new System.Drawing.Point(89, 124);
+            this.textPhone.Location = new System.Drawing.Point(89, 137);
             this.textPhone.Name = "textPhone";
             this.textPhone.Size = new System.Drawing.Size(190, 20);
             this.textPhone.TabIndex = 15;
@@ -143,7 +145,7 @@
             // 
             this.labelEmail.AutoSize = true;
             this.labelEmail.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelEmail.Location = new System.Drawing.Point(28, 174);
+            this.labelEmail.Location = new System.Drawing.Point(28, 179);
             this.labelEmail.Name = "labelEmail";
             this.labelEmail.Size = new System.Drawing.Size(55, 16);
             this.labelEmail.TabIndex = 16;
@@ -151,7 +153,7 @@
             // 
             // textEmail
             // 
-            this.textEmail.Location = new System.Drawing.Point(89, 171);
+            this.textEmail.Location = new System.Drawing.Point(89, 176);
             this.textEmail.Name = "textEmail";
             this.textEmail.Size = new System.Drawing.Size(190, 20);
             this.textEmail.TabIndex = 17;
@@ -169,7 +171,9 @@
             // 
             // grpCustomer
             // 
+            this.grpCustomer.Controls.Add(this.labelId);
             this.grpCustomer.Controls.Add(this.cboStatus);
+            this.grpCustomer.Controls.Add(this.textId);
             this.grpCustomer.Controls.Add(this.labelStatus);
             this.grpCustomer.Controls.Add(this.buttonUpdateCustomer);
             this.grpCustomer.Controls.Add(this.textEmail);
@@ -222,6 +226,23 @@
             this.grdCustomers.Visible = false;
             this.grdCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrdCustomersCellClick);
             // 
+            // labelId
+            // 
+            this.labelId.AutoSize = true;
+            this.labelId.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelId.Location = new System.Drawing.Point(50, 24);
+            this.labelId.Name = "labelId";
+            this.labelId.Size = new System.Drawing.Size(31, 16);
+            this.labelId.TabIndex = 41;
+            this.labelId.Text = "ID:";
+            // 
+            // textId
+            // 
+            this.textId.Location = new System.Drawing.Point(89, 24);
+            this.textId.Name = "textId";
+            this.textId.Size = new System.Drawing.Size(190, 20);
+            this.textId.TabIndex = 40;
+            // 
             // UpdateCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,5 +284,7 @@
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.ComboBox cboStatus;
         private System.Windows.Forms.DataGridView grdCustomers;
+        private System.Windows.Forms.Label labelId;
+        private System.Windows.Forms.TextBox textId;
     }
 }

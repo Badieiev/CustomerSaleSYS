@@ -6,6 +6,7 @@ namespace CustomerSaleSYS
 {
     public partial class UpdateOrder : Form
     {
+        private Order order;
         public UpdateOrder()
         {
             InitializeComponent();
@@ -28,7 +29,9 @@ namespace CustomerSaleSYS
             {
                 cboProduct.Items.Add(dsProduct.Tables[0].Rows[i][0] + " - " + dsProduct.Tables[0].Rows[i][1]);
             }
+            cboOrderStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             cboProduct.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboProductStatus.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void ButtonCloseForm_Click(object sender, EventArgs e)
@@ -55,11 +58,12 @@ namespace CustomerSaleSYS
         private void GrdOrdersCellClick(object sender, DataGridViewCellEventArgs e)
         {
             textQuantity.Clear();
-
             int orID = Convert.ToInt32(grdOrders.Rows[grdOrders.CurrentCell.RowIndex].Cells[0].Value);
-            textOrderId.Text = orID.ToString();
-            dateTimePicker.Value = (DateTime)grdOrders.Rows[grdOrders.CurrentCell.RowIndex].Cells[2].Value;
-            int custId = Convert.ToInt32(grdOrders.Rows[grdOrders.CurrentCell.RowIndex].Cells[1].Value);
+            order = Order.GetOrder(orID);
+            textOrderId.Text = order.ID.ToString();
+            dateTimePicker.Value = DateTime.Parse(order.Date);
+            int custId = order.CustomerId;
+
             foreach (string item in cboCustomer.Items)
             {
                 if (custId == Convert.ToInt32(item.Split(' ')[0])) 
@@ -67,7 +71,27 @@ namespace CustomerSaleSYS
                     cboCustomer.SelectedItem = item;
                 }
             }
-            grdOrder_items.DataSource = Order_item.FindOrder_itemsByID(orID).Tables[0];
+
+            cboOrderStatus.Items.Clear();
+            cboOrderStatus.Items.Add(order.Status);
+            cboOrderStatus.Items.Add(Order.AddCboItem(order.Status));
+            cboOrderStatus.SelectedIndex = 0;
+            if (order.Status == 'A')
+            {
+                cboOrderStatus.Visible = false;
+                labelOrderStatus.Visible = false;
+                cboCustomer.Enabled = true;
+                dateTimePicker.Enabled = true;
+                grdOrder_items.DataSource = Order_item.FindOrder_itemsByID(orID).Tables[0];
+            }
+            else
+            {
+                cboOrderStatus.Visible = true;
+                labelOrderStatus.Visible = true;
+                cboCustomer.Enabled = false;
+                dateTimePicker.Enabled = false;
+                grdOrder_items.DataSource = null;
+            }
         }
 
         private void BtnUpdateOrder_Click(object sender, EventArgs e)
@@ -76,6 +100,10 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("Select the order you want to change");
             }
+            else if (cboOrderStatus.Text == "I")
+            {
+                MessageBox.Show("The order is currently inactive, you can change its status.");
+            }
             else
             {
                 foreach (DataGridViewRow row in grdOrders.Rows)
@@ -83,18 +111,19 @@ namespace CustomerSaleSYS
                     if (Convert.ToInt32(row.Cells[0].Value) == Convert.ToInt32(textOrderId.Text))
                     {
                         if ((Convert.ToInt32(row.Cells[1].Value) == Convert.ToInt32(cboCustomer.SelectedItem.ToString().Split(' ')[0])) &&
-                            (DateTime.Parse(row.Cells[2].Value.ToString()) == dateTimePicker.Value.Date))
+                            (DateTime.Parse(row.Cells[2].Value.ToString()) == dateTimePicker.Value.Date) &&
+                            cboOrderStatus.Visible == false)
                         {
                             MessageBox.Show("You have not changed the customer or date, so the order will remain unchanged.");
                         }
                         else
                         {
-                            //update order using an object or direct sql?
                             int orderID = Convert.ToInt32(textOrderId.Text);
                             int customerID = Convert.ToInt32(cboCustomer.SelectedItem.ToString().Split(' ')[0]);
                             string date = String.Format("{0:dd-MMM-yy}", dateTimePicker.Value);
-                            
-                            Order.UpdateOrderCustomerDetails(orderID, customerID, date);
+                            char status = cboOrderStatus.SelectedItem.ToString()[0];
+
+                            Order.UpdateOrderDetails(orderID, customerID, date, status);
                             MessageBox.Show("Order updated");
                             this.Close();
                         }
@@ -116,6 +145,26 @@ namespace CustomerSaleSYS
 
             int quantity = Convert.ToInt32(grdOrder_items.Rows[grdOrder_items.CurrentCell.RowIndex].Cells[2].Value);
             textQuantity.Text=quantity.ToString();
+
+            cboProductStatus.Items.Clear();
+            char status = Convert.ToChar(grdOrder_items.Rows[grdOrder_items.CurrentCell.RowIndex].Cells[4].Value);
+            cboProductStatus.Items.Add(status);
+            cboProductStatus.Items.Add(Order_item.AddCboItem(status));
+            cboProductStatus.SelectedIndex = 0;
+            if (status == 'A')
+            {
+                cboProductStatus.Visible = false;
+                labelProductStatus.Visible=false;
+                cboProduct.Enabled = true;
+                textQuantity.Enabled = true;
+            }
+            else
+            {
+                cboProductStatus.Visible = true;
+                labelProductStatus.Visible = true;
+                cboProduct.Enabled = false;
+                textQuantity.Enabled = false;
+            }
         }
 
         private void BtnDeleteOrder_item_Click(object sender, EventArgs e)
@@ -124,11 +173,13 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("Select an item from your order");
             }
-            else if (grdOrder_items.Rows.Count == 1)
+            else if (cboProductStatus.SelectedItem.ToString()[0] == 'I')
             {
-                //
-                MessageBox.Show("It is not possible to remove the last item from the order.");
-                this.Close();
+                MessageBox.Show("The product has already been removed, product status I");
+            }
+            else if (Order_item.CountActiveOrder_Items(Convert.ToInt32(textOrderId.Text)) == 1)
+            {
+                MessageBox.Show("It is not possible to remove the last item from the order. But you can delete the order.");
             }
             else if (Convert.ToInt32(grdOrder_items.Rows[grdOrder_items.CurrentCell.RowIndex].Cells[2].Value) != Convert.ToInt32(textQuantity.Text) ||
                     Convert.ToInt32(grdOrder_items.Rows[grdOrder_items.CurrentCell.RowIndex].Cells[1].Value) != Convert.ToInt32(cboProduct.Text.Split(' ')[0]))
@@ -145,7 +196,7 @@ namespace CustomerSaleSYS
                 decimal total = Order.GetOrderSum(orderId);
                 Order.UpdateOrderSum(orderId, total - cost);
 
-                Order_item.UpdateOrder_itemStatus(orderId, productId);
+                Order_item.UpdateOrder_itemStatus(orderId, productId, 'I');
                 Product.UpdateProductQuantity(productId, Product.GetProductQuantity(productId) + quantity);
                 MessageBox.Show("You have removed the selected product from order.");
                 this.Close();
@@ -169,7 +220,8 @@ namespace CustomerSaleSYS
             }
             else if (!Order_item.IsUniqOrder_item(Convert.ToInt32(textOrderId.Text), Convert.ToInt32(cboProduct.Text.Split(' ')[0])))
             {
-                MessageBox.Show("This order already contains this product, but with status I.");
+                MessageBox.Show("This order already contains this product. Please select a product from the drop-down list that is not yet in your order. " + 
+                                "\n\nThe list is available for selection if you are on the line with active status A.");
             }
             else
             {
@@ -219,6 +271,10 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("Select the product you want to change in order and quantity.");
             }
+            else if (cboProductStatus.Text == "I")
+            {
+                MessageBox.Show("The product in order is currently inactive, you can change its status.");
+            }
             else
             {
                 bool checkProduct = false;
@@ -243,7 +299,13 @@ namespace CustomerSaleSYS
                     int stockQuantity = Product.GetProductQuantity(productId);
                     decimal cost = Product.GetProductPrice(productId) * inputQuantity;
 
-                    if (grdQuantity == inputQuantity) 
+                    if (cboProductStatus.Text == "A" && cboProductStatus.Visible == true)
+                    {
+                        Order_item.UpdateOrder_itemStatus(orderId, productId, 'A');
+                        MessageBox.Show("The status of the product in the order has been updated.");
+                        this.Close();
+                    }
+                    else if (grdQuantity == inputQuantity) 
                     {
                         MessageBox.Show("The quantity of product has not changed.");
                     }

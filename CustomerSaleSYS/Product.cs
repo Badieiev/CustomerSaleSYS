@@ -66,10 +66,10 @@ namespace CustomerSaleSYS
 
         public static bool IsUniqName(String name)
         {
-            string sqlQuery = "SELECT MAX(ProductID) FROM Products WHERE ProductName = '" + name + "'";
+            string sqlQuery = "SELECT COUNT(ProductId) FROM Products WHERE ProductName = '" + name + "'";
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
             dr.Read();
-            if (dr.IsDBNull(0))
+            if (dr.GetInt32(0) == 0)
             {
                 return true;
             }
@@ -165,6 +165,20 @@ namespace CustomerSaleSYS
                 "Quantity = '" + quantity + "' " +
                 "WHERE ProductID = " + id;
             Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public static bool IsUniqNameForUpdate(int id, String name)
+        {
+            string sqlQuery = "SELECT COUNT(ProductId) FROM Products WHERE ProductName = '" + name + "' AND ProductId = " + id;
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
+            dr.Read();
+            if (dr.GetInt32(0) == 1)
+            {
+                return true;
+            }
+            else
+                return false;
+            dr.Close();
         }
     }
 }

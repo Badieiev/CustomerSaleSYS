@@ -43,6 +43,8 @@
             this.cboStatus = new System.Windows.Forms.ComboBox();
             this.labelStatus = new System.Windows.Forms.Label();
             this.grpProduct = new System.Windows.Forms.GroupBox();
+            this.labelId = new System.Windows.Forms.Label();
+            this.textId = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdProducts)).BeginInit();
             this.grpProduct.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +73,7 @@
             // 
             // textPrice
             // 
-            this.textPrice.Location = new System.Drawing.Point(83, 150);
+            this.textPrice.Location = new System.Drawing.Point(83, 158);
             this.textPrice.Name = "textPrice";
             this.textPrice.Size = new System.Drawing.Size(190, 20);
             this.textPrice.TabIndex = 25;
@@ -80,7 +82,7 @@
             // 
             this.labelPrice.AutoSize = true;
             this.labelPrice.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPrice.Location = new System.Drawing.Point(22, 150);
+            this.labelPrice.Location = new System.Drawing.Point(22, 158);
             this.labelPrice.Name = "labelPrice";
             this.labelPrice.Size = new System.Drawing.Size(55, 16);
             this.labelPrice.TabIndex = 24;
@@ -88,7 +90,7 @@
             // 
             // textQuantity
             // 
-            this.textQuantity.Location = new System.Drawing.Point(83, 98);
+            this.textQuantity.Location = new System.Drawing.Point(83, 113);
             this.textQuantity.Name = "textQuantity";
             this.textQuantity.Size = new System.Drawing.Size(190, 20);
             this.textQuantity.TabIndex = 23;
@@ -97,7 +99,7 @@
             // 
             this.labelQuantity.AutoSize = true;
             this.labelQuantity.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelQuantity.Location = new System.Drawing.Point(1, 100);
+            this.labelQuantity.Location = new System.Drawing.Point(1, 115);
             this.labelQuantity.Name = "labelQuantity";
             this.labelQuantity.Size = new System.Drawing.Size(79, 16);
             this.labelQuantity.TabIndex = 22;
@@ -107,7 +109,7 @@
             // 
             this.labelName.AutoSize = true;
             this.labelName.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelName.Location = new System.Drawing.Point(24, 43);
+            this.labelName.Location = new System.Drawing.Point(24, 68);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(55, 16);
             this.labelName.TabIndex = 21;
@@ -115,7 +117,7 @@
             // 
             // textName
             // 
-            this.textName.Location = new System.Drawing.Point(83, 43);
+            this.textName.Location = new System.Drawing.Point(83, 68);
             this.textName.Name = "textName";
             this.textName.Size = new System.Drawing.Size(190, 20);
             this.textName.TabIndex = 20;
@@ -166,7 +168,7 @@
             this.cboStatus.Items.AddRange(new object[] {
             "A",
             "I"});
-            this.cboStatus.Location = new System.Drawing.Point(83, 198);
+            this.cboStatus.Location = new System.Drawing.Point(83, 202);
             this.cboStatus.Name = "cboStatus";
             this.cboStatus.Size = new System.Drawing.Size(121, 21);
             this.cboStatus.TabIndex = 36;
@@ -175,7 +177,7 @@
             // 
             this.labelStatus.AutoSize = true;
             this.labelStatus.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelStatus.Location = new System.Drawing.Point(8, 200);
+            this.labelStatus.Location = new System.Drawing.Point(8, 204);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(71, 16);
             this.labelStatus.TabIndex = 35;
@@ -183,7 +185,9 @@
             // 
             // grpProduct
             // 
+            this.grpProduct.Controls.Add(this.labelId);
             this.grpProduct.Controls.Add(this.cboStatus);
+            this.grpProduct.Controls.Add(this.textId);
             this.grpProduct.Controls.Add(this.labelStatus);
             this.grpProduct.Controls.Add(this.buttonUpdateProduct);
             this.grpProduct.Controls.Add(this.textPrice);
@@ -199,6 +203,23 @@
             this.grpProduct.TabStop = false;
             this.grpProduct.Text = "Update Product Details";
             this.grpProduct.Visible = false;
+            // 
+            // labelId
+            // 
+            this.labelId.AutoSize = true;
+            this.labelId.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelId.Location = new System.Drawing.Point(44, 26);
+            this.labelId.Name = "labelId";
+            this.labelId.Size = new System.Drawing.Size(31, 16);
+            this.labelId.TabIndex = 39;
+            this.labelId.Text = "ID:";
+            // 
+            // textId
+            // 
+            this.textId.Location = new System.Drawing.Point(83, 26);
+            this.textId.Name = "textId";
+            this.textId.Size = new System.Drawing.Size(190, 20);
+            this.textId.TabIndex = 38;
             // 
             // UpdateProduct
             // 
@@ -239,5 +260,7 @@
         private System.Windows.Forms.ComboBox cboStatus;
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.GroupBox grpProduct;
+        private System.Windows.Forms.Label labelId;
+        private System.Windows.Forms.TextBox textId;
     }
 }
