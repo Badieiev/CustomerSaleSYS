@@ -59,6 +59,16 @@ INSERT INTO Customers
 VALUES(4,'Aoife','Brennan','0853125467','email4@domain.ie','A');
 INSERT INTO Customers
 VALUES(5,'Roisin','Murphy','0851234567','email5@domain.ie','A');
+INSERT INTO Customers
+VALUES(6,'Farrokh','Bulsara','0853234567','email6@domain.ie','A');
+INSERT INTO Customers
+VALUES(7,'Marshall','Mathers','0854234567','email7@domain.ie','A');
+INSERT INTO Customers
+VALUES(8,'Gordon','Sumner','0858234567','email8@domain.ie','A');
+INSERT INTO Customers
+VALUES(9,'Reginald','Dwigh','0859234567','email9@domain.ie','A');
+INSERT INTO Customers
+VALUES(10,'Louise','Ciccone','0859134567','email@domain.ie','A');
 
 PROMPT POPULATING Table Products
 INSERT INTO Products
