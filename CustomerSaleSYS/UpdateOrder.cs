@@ -298,9 +298,17 @@ namespace CustomerSaleSYS
                     int inputQuantity = Convert.ToInt32(textQuantity.Text);
                     int stockQuantity = Product.GetProductQuantity(productId);
                     decimal cost = Product.GetProductPrice(productId) * inputQuantity;
+                    decimal total = Order.GetOrderSum(orderId);
 
                     if (cboProductStatus.Text == "A" && cboProductStatus.Visible == true)
                     {
+                        if (stockQuantity < inputQuantity)
+                        {
+                            MessageBox.Show("Unfortunately, the specified quantity is not available.");
+                            return;
+                        }
+                        Product.UpdateProductQuantity(productId, Product.GetProductQuantity(productId) - inputQuantity);
+                        Order.UpdateOrderSum(orderId, total + cost);
                         Order_item.UpdateOrder_itemStatus(orderId, productId, 'A');
                         MessageBox.Show("The status of the product in the order has been updated.");
                         this.Close();
