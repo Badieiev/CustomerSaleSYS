@@ -127,11 +127,18 @@ namespace CustomerSaleSYS
                 return 'A';
         }
 
-        public static DataSet GetProductName()
+        public static DataSet GetActiveProductName()
         {
             String sqlQuery = "SELECT ProductId, ProductName " +
                                 "FROM Products " +
                                 "WHERE Status LIKE 'A'";
+            return Database.ExecuteMultiRowQuery(sqlQuery);
+        }
+
+        public static DataSet GetAllProductName()
+        {
+            String sqlQuery = "SELECT ProductId, ProductName " +
+                                "FROM Products";
             return Database.ExecuteMultiRowQuery(sqlQuery);
         }
 

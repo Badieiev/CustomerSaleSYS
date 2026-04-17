@@ -80,5 +80,25 @@ namespace CustomerSaleSYS
                 return false;
             }
         }
+
+        public static bool Equal0orGreater(string s)
+        {
+            int q;
+            if (int.TryParse(s, out q))
+            {
+                if (q >= 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace CustomerSaleSYS
             }
             cboCustomer.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            DataSet dsProduct = Product.GetProductName();
+            DataSet dsProduct = Product.GetActiveProductName();
             cboProduct.Items.Clear();
             cboProduct.DataSource = dsProduct.Tables[0];
             cboProduct.DisplayMember = "ProductName";

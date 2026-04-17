@@ -23,7 +23,7 @@ namespace CustomerSaleSYS
             }
             cboCustomer.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            DataSet dsProduct = Product.GetProductName();
+            DataSet dsProduct = Product.GetAllProductName();
             cboProduct.Items.Clear();
             for (int i = 0; i < dsProduct.Tables[0].Rows.Count; i++)
             {
@@ -103,6 +103,10 @@ namespace CustomerSaleSYS
             else if (cboOrderStatus.Text == "I")
             {
                 MessageBox.Show("The order is currently inactive, you can change its status.");
+            }
+            else if (!Validation.IsValidQuantity(textQuantity.Text))
+            {
+                MessageBox.Show("Incorrect data entered in the quantity field.");
             }
             else
             {
@@ -186,6 +190,10 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("The product or quantity of the product does not match the selected one");
             }
+            else if (!Validation.IsValidQuantity(textQuantity.Text))
+            {
+                MessageBox.Show("Incorrect data entered in the quantity field.");
+            }
             else
             {
                 int orderId = Convert.ToInt32(grdOrder_items.Rows[grdOrder_items.CurrentCell.RowIndex].Cells[0].Value);
@@ -222,6 +230,10 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("This order already contains this product. Please select a product from the drop-down list that is not yet in your order. " + 
                                 "\n\nThe list is available for selection if you are on the line with active status A.");
+            }
+            else if (!Validation.IsValidQuantity(textQuantity.Text))
+            {
+                MessageBox.Show("Incorrect data entered in the quantity field.");
             }
             else
             {
@@ -305,6 +317,7 @@ namespace CustomerSaleSYS
                         if (stockQuantity < inputQuantity)
                         {
                             MessageBox.Show("Unfortunately, the specified quantity is not available.");
+                            //
                             return;
                         }
                         Product.UpdateProductQuantity(productId, Product.GetProductQuantity(productId) - inputQuantity);
