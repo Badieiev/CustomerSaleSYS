@@ -5,7 +5,8 @@ namespace CustomerSaleSYS
 {
     internal class Database
     {
-        public const string connectionString = "Data Source = localhost/orcl; User Id = C##andrii; Password = A104Oracle;";
+        public static string connectionString = FileReader.GetConnectionString();
+        //public const string connectionString = "Data Source = localhost/orcl; User Id = xxxxxxxxx; Password = **********;";
         //public const string connectionString = "Data Source = studentoracle:1521/orcl; User Id = tnnnnnnnn; Password = **********;";
 
         public static OracleConnection OpenConnection() {
