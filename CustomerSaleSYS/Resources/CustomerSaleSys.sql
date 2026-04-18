@@ -9,7 +9,7 @@ CREATE TABLE Customers (
     CustomerID number(4),
     Forename varchar2(20),
     Surname varchar2(20),
-    Phone varchar2(10),
+    Phone varchar2(20),
     Email varchar2(20),
     Status char(1),
     CONSTRAINT pk_Customers PRIMARY KEY (CustomerID)
@@ -41,7 +41,7 @@ CREATE TABLE Order_items (
     OrderID number(4),
     ProductID number(4),
     Quantity number(10),
-    Cost number(10,2),
+    Cost number(10,2),wd
     Status char(1),
     CONSTRAINT pk_Order_items PRIMARY KEY (OrderID, ProductID),
     CONSTRAINT fk_Order_items_Order FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),

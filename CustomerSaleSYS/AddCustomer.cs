@@ -38,9 +38,9 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("Only letters can be used in the surname field.");
             }
-            else if (!Validation.IsValidPhone(textPhone.Text))
+            else if (!Validation.IsValidPhoneNumber(textPhone.Text))
             {
-                MessageBox.Show("The phone number must contain 10 digits and only digits");
+                MessageBox.Show("The phone number must start with +353 or 0 and then be 9 digits long.");
             }
             else if (!Validation.IsValidEmail(textEmail.Text))
             {

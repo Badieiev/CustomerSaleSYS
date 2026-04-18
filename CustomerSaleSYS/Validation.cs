@@ -32,6 +32,7 @@ namespace CustomerSaleSYS
                 return false; }
         }
 
+        //
         public static bool IsValidPhone(string phone)
         {
             if (phone.All(char.IsDigit) && phone.Length ==10)
@@ -39,6 +40,14 @@ namespace CustomerSaleSYS
                 return true;
             }
             else { return false; }
+        }
+
+        public static bool IsValidPhoneNumber(string phone)
+        {
+            if (Regex.IsMatch(phone, @"^\+353|0\d{9}$"))
+            {
+                return true;
+            }else { return false; }
         }
 
         public static bool IsValidDecimal(string s)
