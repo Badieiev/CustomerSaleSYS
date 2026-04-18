@@ -81,5 +81,15 @@ INSERT INTO Products
 VALUES(4,'Product4', 4, 1.5,'A');
 INSERT INTO Products
 VALUES(5,'Product5', 45, 4.5,'A');
+INSERT INTO Products
+VALUES(6,'Product6', 25, 14.5,'A');
+INSERT INTO Products
+VALUES(7,'Product7', 33, 22.5,'A');
+INSERT INTO Products
+VALUES(8,'Product8', 75, 3.5,'A');
+INSERT INTO Products
+VALUES(9,'Product9', 6, 7.5,'A');
+INSERT INTO Products
+VALUES(10,'Product10', 10, 4.55,'A');
 
 COMMIT;
