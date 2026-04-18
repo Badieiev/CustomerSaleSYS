@@ -69,7 +69,7 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("Fill in all fields");
             }
-            else if (!Validation.Equal0orGreater(textQuantity.Text))
+            else if (!Validation.IsNonNegativeNumber(textQuantity.Text))
             {
                 MessageBox.Show("Incorrect data entered in the quantity field.");
             }

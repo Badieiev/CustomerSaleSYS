@@ -89,7 +89,7 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("Please indicate the quantity");
             }
-            else if (!Validation.IsValidQuantity(textQuantity.Text))
+            else if (!Validation.IsPositiveInteger(textQuantity.Text))
             {
                 MessageBox.Show("Incorrect data entered in the quantity field.");
             }

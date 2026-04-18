@@ -45,7 +45,7 @@ namespace CustomerSaleSYS
             {
                 grdOrders.DataSource = Order.FindAllOrders().Tables[0];
             }
-            else if (!Validation.IsValidQuantity(textSearchOrder.Text))
+            else if (!Validation.IsPositiveInteger(textSearchOrder.Text))
             {
                 MessageBox.Show("Incorrect data entered in the ID field.");
             }
@@ -104,7 +104,7 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("The order is currently inactive, you can change its status.");
             }
-            else if (!Validation.IsValidQuantity(textQuantity.Text))
+            else if (!Validation.IsPositiveInteger(textQuantity.Text))
             {
                 MessageBox.Show("Incorrect data entered in the quantity field.");
             }
@@ -190,7 +190,7 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("The product or quantity of the product does not match the selected one");
             }
-            else if (!Validation.IsValidQuantity(textQuantity.Text))
+            else if (!Validation.IsPositiveInteger(textQuantity.Text))
             {
                 MessageBox.Show("Incorrect data entered in the quantity field.");
             }
@@ -231,7 +231,7 @@ namespace CustomerSaleSYS
                 MessageBox.Show("This order already contains this product. Please select a product from the drop-down list that is not yet in your order. " + 
                                 "\n\nThe list is available for selection if you are on the line with active status A.");
             }
-            else if (!Validation.IsValidQuantity(textQuantity.Text))
+            else if (!Validation.IsPositiveInteger(textQuantity.Text))
             {
                 MessageBox.Show("Incorrect data entered in the quantity field.");
             }

@@ -42,6 +42,7 @@ namespace CustomerSaleSYS
             else { return false; }
         }
 
+        //https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.ismatch?view=net-10.0
         public static bool IsValidPhoneNumber(string phone)
         {
             if (Regex.IsMatch(phone, @"^\+353|0\d{9}$"))
@@ -70,7 +71,7 @@ namespace CustomerSaleSYS
             }
         }
 
-        public static bool IsValidQuantity(string s)
+        public static bool IsPositiveInteger(string s)
         {
             int q;
             if (int.TryParse(s, out q))
@@ -90,7 +91,7 @@ namespace CustomerSaleSYS
             }
         }
 
-        public static bool Equal0orGreater(string s)
+        public static bool IsNonNegativeNumber(string s)
         {
             int q;
             if (int.TryParse(s, out q))

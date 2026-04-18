@@ -21,7 +21,7 @@ namespace CustomerSaleSYS
             {
                 grdOrders.DataSource = Order.FindAllOrdersFullInfo().Tables[0];
             }
-            else if (!Validation.IsValidQuantity(textSearchOrder.Text))
+            else if (!Validation.IsPositiveInteger(textSearchOrder.Text))
             {
                 MessageBox.Show("Incorrect data entered in the ID field.");
             }

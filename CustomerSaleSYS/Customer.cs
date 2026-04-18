@@ -24,6 +24,7 @@ namespace CustomerSaleSYS
             Email = email;
             Status = 'A';
         }
+
         public Customer(int id, string firstName, string lastName, string phone, string email, char status) 
         {
             Id = id;
@@ -32,13 +33,6 @@ namespace CustomerSaleSYS
             Phone = phone;
             Email = email;
             Status = status;
-        }
-
-        //0
-        public override string ToString() 
-        {
-            return "Customer ID: " + Id + "\tName: " + FirstName + "\tSurname: " + LastName + 
-                "\tPhone: " + Phone + "\tEmail: " + Email + "\tStatus: " + Status;
         }
 
         public static Customer GetCustomer(int id)
