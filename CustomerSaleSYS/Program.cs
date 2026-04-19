@@ -16,6 +16,9 @@ namespace CustomerSaleSYS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            DatabaseLoader.IsCustomerTableExists();
+
             Application.Run(new CustomerSaleSystem());
         }
     }

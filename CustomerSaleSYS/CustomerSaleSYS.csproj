@@ -103,6 +103,7 @@
     </Compile>
     <Compile Include="Customer.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="DatabaseLoader.cs" />
     <Compile Include="DeleteOrder.cs">
       <SubType>Form</SubType>
     </Compile>
