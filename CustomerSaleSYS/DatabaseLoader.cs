@@ -25,6 +25,7 @@ namespace CustomerSaleSYS
             }
             catch (OracleException e)
             {
+            //https://docs.oracle.com/en/error-help/db/ora-00955/?r=26ai
                 if (e.Number != 955)
                     throw;
             }

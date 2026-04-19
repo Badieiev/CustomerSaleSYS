@@ -32,16 +32,6 @@ namespace CustomerSaleSYS
                 return false; }
         }
 
-        //
-        public static bool IsValidPhone(string phone)
-        {
-            if (phone.All(char.IsDigit) && phone.Length ==10)
-            {
-                return true;
-            }
-            else { return false; }
-        }
-
         //https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.ismatch?view=net-10.0
         public static bool IsValidPhoneNumber(string phone)
         {
