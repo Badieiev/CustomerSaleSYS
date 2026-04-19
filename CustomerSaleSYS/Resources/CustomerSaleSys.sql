@@ -41,7 +41,7 @@ CREATE TABLE Order_items (
     OrderID number(4),
     ProductID number(4),
     Quantity number(10),
-    Cost number(10,2),wd
+    Cost number(10,2),
     Status char(1),
     CONSTRAINT pk_Order_items PRIMARY KEY (OrderID, ProductID),
     CONSTRAINT fk_Order_items_Order FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
@@ -91,5 +91,29 @@ INSERT INTO Products
 VALUES(9,'Product9', 6, 7.5,'A');
 INSERT INTO Products
 VALUES(10,'Product10', 10, 4.55,'A');
+
+PROMPT POPULATING Table Orders
+INSERT INTO Orders
+VALUES(1, 1, TO_DATE('2026-01-19', 'YYYY-MM-DD'), 15.5,'A');
+INSERT INTO Orders
+VALUES(2, 2, TO_DATE('2026-02-19', 'YYYY-MM-DD'), 51.0,'A');
+INSERT INTO Orders
+VALUES(3, 3, TO_DATE('2026-03-19', 'YYYY-MM-DD'), 15.0,'I');
+INSERT INTO Orders
+VALUES(4, 4, TO_DATE('2026-04-19', 'YYYY-MM-DD'), 6.0,'A');
+INSERT INTO Orders
+VALUES(5, 5, TO_DATE('2026-05-19', 'YYYY-MM-DD'), 22.5,'A');
+
+PROMPT POPULATING Table Order_items
+INSERT INTO Order_items
+VALUES(1, 1, 1, 15.5,'A');
+INSERT INTO Order_items
+VALUES(2, 2, 2, 51.0,'A');
+INSERT INTO Order_items
+VALUES(3, 3, 3, 15.0,'A');
+INSERT INTO Order_items
+VALUES(4, 4, 4, 6.0,'A');
+INSERT INTO Order_items
+VALUES(5, 5, 5, 22.5,'A');
 
 COMMIT;
