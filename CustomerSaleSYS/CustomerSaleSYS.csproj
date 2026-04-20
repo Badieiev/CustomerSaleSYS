@@ -235,12 +235,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\product2025.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\product2024.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\CustomerSaleSystem.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

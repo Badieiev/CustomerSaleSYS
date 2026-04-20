@@ -17,26 +17,35 @@ namespace CustomerSaleSYS
             InitializeComponent();
         }
 
-        private void buttonCloseForm_Click(object sender, EventArgs e)
+        private void FormProductAnalysisLoad(object sender, EventArgs e)
+        {
+            DataSet dsOrder = Analysis.GetYearFromOrders();
+            cboYear.Items.Clear();
+            for (int i = 0; i < dsOrder.Tables[0].Rows.Count; i++)
+            {
+                cboYear.Items.Add(dsOrder.Tables[0].Rows[i][0]);
+            }
+            cboYear.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private void ButtonCloseForm_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void buttonShowGraph_Click(object sender, EventArgs e)
+        private void ButtonShowGraph_Click(object sender, EventArgs e)
         {
-            if (comboBoxYear.Text == "2024")
+            if (cboYear.Items.Count == 0)
             {
-                pictureBoxProduct.Visible = true;
-                pictureBoxProduct.Image = Properties.Resources.product2024;
+                MessageBox.Show("Data not found, please check the contents of the order table.");
             }
-            else if (comboBoxYear.Text == "2025")
+            else if (cboYear.SelectedItem == null)
             {
-                pictureBoxProduct.Visible = true;
-                pictureBoxProduct.Image = Properties.Resources.product2025;
+                MessageBox.Show("Select a year from the drop-down list.");
             }
             else
             {
-                MessageBox.Show("Please select a year");
+                Analysis.PopulateProductChartByYear(chtData, Convert.ToInt32(cboYear.SelectedItem));
             }
         }
     }
