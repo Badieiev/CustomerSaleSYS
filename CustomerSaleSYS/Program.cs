@@ -18,6 +18,7 @@ namespace CustomerSaleSYS
             Application.SetCompatibleTextRenderingDefault(false);
 
             DatabaseLoader.IsCustomerTableExists();
+            DatabaseLoader.IsProductTableExists();
 
             Application.Run(new CustomerSaleSystem());
         }
