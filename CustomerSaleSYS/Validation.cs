@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace CustomerSaleSYS
 {
@@ -98,6 +99,18 @@ namespace CustomerSaleSYS
             else
             {
                 return false;
+            }
+        }
+
+        public static bool IsDateValid(DateTimePicker dateTimePicker)
+        {
+            if (dateTimePicker.Value > DateTime.Now)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

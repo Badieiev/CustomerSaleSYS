@@ -30,8 +30,12 @@ namespace CustomerSaleSYS
                 cboProduct.Items.Add(dsProduct.Tables[0].Rows[i][0] + " - " + dsProduct.Tables[0].Rows[i][1]);
             }
             cboOrderStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboOrderStatus.Visible = false;
+            labelOrderStatus.Visible = false;
             cboProduct.DropDownStyle = ComboBoxStyle.DropDownList;
             cboProductStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboProductStatus.Visible = false;
+            labelProductStatus.Visible = false;
         }
 
         private void ButtonCloseForm_Click(object sender, EventArgs e)
@@ -104,9 +108,9 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("The order is currently inactive, you can change its status.");
             }
-            else if (!Validation.IsPositiveInteger(textQuantity.Text))
+            else if (!Validation.IsDateValid(dateTimePicker))
             {
-                MessageBox.Show("Incorrect data entered in the quantity field.");
+                MessageBox.Show("You cannot choose a date from the future.");
             }
             else
             {

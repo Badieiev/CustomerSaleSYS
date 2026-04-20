@@ -58,6 +58,10 @@ namespace CustomerSaleSYS
             {
                 MessageBox.Show("Please add at least one product to place an order.");
             }
+            else if (!Validation.IsDateValid(dateTimePicker))
+            {
+                MessageBox.Show("You cannot choose a date from the future.");
+            }
             else
             {
                 int orderId = Convert.ToInt32(textID.Text);

@@ -13,6 +13,7 @@ namespace CustomerSaleSYS
     {
         public static void PopulateRevenueChartByYear(Chart chart, int year)
         {
+            chart.Titles.Clear();
             string query = "SELECT SUM(OrderSum), to_Char(OrderDate,'MM') " +
                             "FROM Orders " +
                             "WHERE EXTRACT(YEAR FROM OrderDate) = " + year +
@@ -53,9 +54,9 @@ namespace CustomerSaleSYS
             return Database.ExecuteMultiRowQuery(sqlQuery);
         }
 
-        
         public static void PopulateProductChartByYear(Chart chart, int year)
         {
+            chart.Titles.Clear();
             string query = "SELECT ProductName, total " +
                             "FROM( "+
                                 "SELECT p.ProductName, i.total "+
@@ -68,13 +69,13 @@ namespace CustomerSaleSYS
                                     "ORDER BY total DESC " +
                                 ") i " +
                                 "JOIN Products p ON p.ProductId = i.ProductId) " +
-                            "WHERE ROWNUM <= 10 " +
+                            "WHERE ROWNUM <= 12 " +
                             "ORDER BY total DESC ";
             DataSet ds = Database.ExecuteMultiRowQuery(query);
 
             //Initialise the arrays
-            string[] products = new string[10];
-            int[] quantity = new int[10]; //all set to zero
+            string[] products = new string[12];
+            int[] quantity = new int[12]; //all set to zero
 
             //Next, save the amounts returned in query to the appropriate element in amounts[]
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
