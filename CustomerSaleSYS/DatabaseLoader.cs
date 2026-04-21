@@ -54,5 +54,27 @@ namespace CustomerSaleSYS
                     throw;
             }
         }
+
+        public static void IsOrderTableExists()
+        {
+            try
+            {
+                string sql = "CREATE TABLE Orders (" +
+                             "OrderID number(4), " +
+                             "CustomerID number(4), " +
+                             "OrderDate DATE, " +
+                             "OrderSum number(10, 2), " +
+                             "Status char(1), " +
+                             "CONSTRAINT pk_Orders PRIMARY KEY(OrderID), " +
+                             "CONSTRAINT fk_Orders_Customers FOREIGN KEY(CustomerID) REFERENCES Customers(CustomerID))";
+                Database.ExecuteNonQuery(sql);
+            }
+            catch (OracleException e)
+            {
+                //https://docs.oracle.com/en/error-help/db/ora-00955/?r=26ai
+                if (e.Number != 955)
+                    throw;
+            }
+        }
     }
 }
