@@ -150,5 +150,19 @@ namespace CustomerSaleSYS
             else
                 return 'A';
         }
+
+        public static int CheckCustomerInOrders(int customerId)
+        {
+            string sqlQuery = "SELECT COUNT(CustomerId) " +
+                              "FROM Orders " +
+                              "WHERE CustomerId = " + customerId;
+            DataSet dr = Database.ExecuteMultiRowQuery(sqlQuery);
+            int check = 0;
+            foreach (DataRow row in dr.Tables[0].Rows)
+            {
+                check += Convert.ToInt32(row[0].ToString());
+            }
+            return check;
+        }
     }
 }

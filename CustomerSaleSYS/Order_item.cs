@@ -118,5 +118,19 @@ namespace CustomerSaleSYS
             dr.Close();
             return num;
         }
+
+        public static int CheckProductInOrder_items(int productId)
+        {
+            string sqlQuery = "SELECT COUNT(ProductId) " +
+                              "FROM Order_items " +
+                              "WHERE ProductId = " + productId;
+            DataSet dr = Database.ExecuteMultiRowQuery(sqlQuery);
+            int check = 0;
+            foreach (DataRow row in dr.Tables[0].Rows)
+            {
+                check += Convert.ToInt32(row[0].ToString());
+            }
+            return check;
+        }
     }
 }

@@ -25,13 +25,21 @@ namespace CustomerSaleSYS
 
         private void buttonDeleteProduct_Click(object sender, EventArgs e)
         {
-            product.Name = textName.Text;
-            product.Quantity = Convert.ToInt32(textQuantity.Text);
-            product.Price = Convert.ToDecimal(textPrice.Text);
-            product.Status = 'I';
-            product.UpdateProduct();
-            MessageBox.Show("Product deleted");
-            this.Close();
+            int productId = Convert.ToInt32(textProductId.Text);
+            if (Order_item.CheckProductInOrder_items(productId) > 0)
+            {
+                MessageBox.Show("It is impossible to delete product while an order involving this product has been created.");
+            }
+            else
+            {
+                product.Name = textName.Text;
+                product.Quantity = Convert.ToInt32(textQuantity.Text);
+                product.Price = Convert.ToDecimal(textPrice.Text);
+                product.Status = 'I';
+                product.UpdateProduct();
+                MessageBox.Show("Product deleted");
+                this.Close();
+            }
         }
 
         private void buttonSearchProduct_Click(object sender, EventArgs e)

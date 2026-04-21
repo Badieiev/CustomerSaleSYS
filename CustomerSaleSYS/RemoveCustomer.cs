@@ -44,14 +44,22 @@ namespace CustomerSaleSYS
 
         private void ButtonDeleteCustomer_Click(object sender, EventArgs e)
         {
-            customer.FirstName = textName.Text;
-            customer.LastName = textSurname.Text;
-            customer.Phone = textPhone.Text;
-            customer.Email = textEmail.Text;
-            customer.Status = 'I';
-            customer.UpdateCustomer();
-            MessageBox.Show("Profile deleted");
-            this.Close();
+            int customerId = Convert.ToInt32(textCustomerId.Text);
+            if (Order.CheckCustomerInOrders(customerId) > 0)
+            {
+                MessageBox.Show("It is impossible to delete a user while an order involving this user has been created.");
+            }
+            else
+            {
+                customer.FirstName = textName.Text;
+                customer.LastName = textSurname.Text;
+                customer.Phone = textPhone.Text;
+                customer.Email = textEmail.Text;
+                customer.Status = 'I';
+                customer.UpdateCustomer();
+                MessageBox.Show("Profile deleted");
+                this.Close();
+            }
         }
 
         private void ButtonCloseForm_Click(object sender, EventArgs e)

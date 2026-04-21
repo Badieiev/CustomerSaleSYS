@@ -31,7 +31,7 @@ VALUES(1,'Product1', 20, 15.5,'A');
 INSERT INTO Products
 VALUES(2,'Product2', 22, 25.5,'A');
 INSERT INTO Products
-VALUES(3,'Product3', 10, 5.0,'I');
+VALUES(3,'Product3', 10, 5.0,'A');
 INSERT INTO Products
 VALUES(4,'Product4', 4, 1.5,'A');
 INSERT INTO Products
@@ -53,7 +53,7 @@ VALUES(1, 1, TO_DATE('2026-01-19', 'YYYY-MM-DD'), 15.5,'A');
 INSERT INTO Orders
 VALUES(2, 2, TO_DATE('2026-02-19', 'YYYY-MM-DD'), 87.0,'A');
 INSERT INTO Orders
-VALUES(3, 3, TO_DATE('2026-03-19', 'YYYY-MM-DD'), 15.0,'I');
+VALUES(3, 2, TO_DATE('2026-03-19', 'YYYY-MM-DD'), 15.0,'I');
 INSERT INTO Orders
 VALUES(4, 4, TO_DATE('2026-04-19', 'YYYY-MM-DD'), 6.0,'A');
 INSERT INTO Orders
