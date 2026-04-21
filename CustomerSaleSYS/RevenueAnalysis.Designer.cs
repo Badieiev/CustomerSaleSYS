@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.buttonCloseForm = new System.Windows.Forms.Button();
             this.cboYear = new System.Windows.Forms.ComboBox();
             this.labelYear = new System.Windows.Forms.Label();
             this.buttonShowGraph = new System.Windows.Forms.Button();
             this.chtData = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.lsbOutput = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.chtData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             this.cboYear.Items.AddRange(new object[] {
             "2024",
             "2025"});
-            this.cboYear.Location = new System.Drawing.Point(159, 13);
+            this.cboYear.Location = new System.Drawing.Point(12, 60);
             this.cboYear.Name = "cboYear";
             this.cboYear.Size = new System.Drawing.Size(191, 24);
             this.cboYear.TabIndex = 56;
@@ -66,16 +67,16 @@
             // 
             this.labelYear.AutoSize = true;
             this.labelYear.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelYear.Location = new System.Drawing.Point(106, 16);
+            this.labelYear.Location = new System.Drawing.Point(9, 41);
             this.labelYear.Name = "labelYear";
-            this.labelYear.Size = new System.Drawing.Size(47, 16);
+            this.labelYear.Size = new System.Drawing.Size(103, 16);
             this.labelYear.TabIndex = 55;
-            this.labelYear.Text = "Year:";
+            this.labelYear.Text = "Select Year:";
             // 
             // buttonShowGraph
             // 
             this.buttonShowGraph.Font = new System.Drawing.Font("Corbel", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonShowGraph.Location = new System.Drawing.Point(366, 12);
+            this.buttonShowGraph.Location = new System.Drawing.Point(86, 108);
             this.buttonShowGraph.Name = "buttonShowGraph";
             this.buttonShowGraph.Size = new System.Drawing.Size(117, 23);
             this.buttonShowGraph.TabIndex = 54;
@@ -85,25 +86,34 @@
             // 
             // chtData
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chtData.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chtData.Legends.Add(legend2);
-            this.chtData.Location = new System.Drawing.Point(111, 107);
+            chartArea1.Name = "ChartArea1";
+            this.chtData.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtData.Legends.Add(legend1);
+            this.chtData.Location = new System.Drawing.Point(232, 41);
             this.chtData.Name = "chtData";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chtData.Series.Add(series2);
-            this.chtData.Size = new System.Drawing.Size(571, 300);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chtData.Series.Add(series1);
+            this.chtData.Size = new System.Drawing.Size(540, 408);
             this.chtData.TabIndex = 58;
             this.chtData.Text = "chart1";
+            // 
+            // lsbOutput
+            // 
+            this.lsbOutput.FormattingEnabled = true;
+            this.lsbOutput.Location = new System.Drawing.Point(12, 185);
+            this.lsbOutput.Name = "lsbOutput";
+            this.lsbOutput.Size = new System.Drawing.Size(191, 264);
+            this.lsbOutput.TabIndex = 59;
             // 
             // RevenueAnalysis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 461);
+            this.Controls.Add(this.lsbOutput);
             this.Controls.Add(this.chtData);
             this.Controls.Add(this.cboYear);
             this.Controls.Add(this.labelYear);
@@ -126,5 +136,6 @@
         private System.Windows.Forms.Label labelYear;
         private System.Windows.Forms.Button buttonShowGraph;
         private System.Windows.Forms.DataVisualization.Charting.Chart chtData;
+        private System.Windows.Forms.ListBox lsbOutput;
     }
 }

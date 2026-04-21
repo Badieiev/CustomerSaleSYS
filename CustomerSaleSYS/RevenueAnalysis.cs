@@ -26,6 +26,9 @@ namespace CustomerSaleSYS
                 cboYear.Items.Add(dsOrder.Tables[0].Rows[i][0]);
             }
             cboYear.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            lsbOutput.Visible = false;
+            chtData.Visible = false;
         }
 
         private void ButtonCloseForm_Click(object sender, EventArgs e)
@@ -45,7 +48,18 @@ namespace CustomerSaleSYS
             }
             else
             {
-                Analysis.PopulateRevenueChartByYear(chtData, Convert.ToInt32(cboYear.SelectedItem));
+                int year = Convert.ToInt32(cboYear.SelectedItem);
+                var monthlyRevenue = Analysis.GetRenevuePerMonth(year);
+                lsbOutput.Items.Clear();
+                lsbOutput.Items.Add("Monthly revenue for " + year);
+                foreach (var item in monthlyRevenue)
+                {
+                    lsbOutput.Items.Add(item.Key + ": " + item.Value + " €");
+                }
+                lsbOutput.Visible = true;
+
+                Analysis.PopulateRevenueChartByYear(chtData, year);
+                chtData.Visible = true;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -98,6 +99,25 @@ namespace CustomerSaleSYS
             chart.ChartAreas[0].AxisX.Interval = 1; // Show every label
             chart.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
             chart.Visible = true;
+        }
+
+        public static Dictionary<string, decimal> GetRenevuePerMonth(int year)
+        {
+            Dictionary<string, decimal> data = new Dictionary<string, decimal>();
+            string sql = "SELECT to_char(OrderDate, 'MON') AS MonName, to_char(OrderDate, 'MM') AS MonNum, " +
+                         "NVL(SUM(OrderSum),0) AS Total " +
+                         "FROM ORDERS " +
+                         "WHERE EXTRACT(YEAR FROM OrderDate) = " + year +
+                         "GROUP BY to_char(OrderDate, 'MON'), to_char(OrderDate, 'MM') " +
+                         "ORDER BY to_char(OrderDate, 'MM')";
+            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                string month = row["MonName"].ToString().Trim();
+                decimal revenue = Convert.ToDecimal(row["Total"]);
+                data[month] = revenue;
+            }
+            return data;
         }
     }
 }
