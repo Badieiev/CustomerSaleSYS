@@ -20,6 +20,7 @@ namespace CustomerSaleSYS
             DatabaseLoader.IsCustomerTableExists();
             DatabaseLoader.IsProductTableExists();
             DatabaseLoader.IsOrderTableExists();
+            DatabaseLoader.IsOrder_itemTableExists();
 
             Application.Run(new CustomerSaleSystem());
         }

@@ -76,5 +76,28 @@ namespace CustomerSaleSYS
                     throw;
             }
         }
+
+        public static void IsOrder_itemTableExists()
+        {
+            try
+            {
+                string sql = "CREATE TABLE Order_items (" +
+                             "OrderID number(4), " +
+                             "ProductID number(4), " +
+                             "Quantity number(10), " +
+                             "Cost number(10,2), " +
+                             "Status char(1), " +
+                             "CONSTRAINT pk_Order_items PRIMARY KEY(OrderID, ProductID), " +
+                             "CONSTRAINT fk_Order_items_Order FOREIGN KEY(OrderID) REFERENCES Orders(OrderID), " +
+                             "CONSTRAINT fk_Order_items_Products FOREIGN KEY(ProductID) REFERENCES Products(ProductID))";
+                Database.ExecuteNonQuery(sql);
+            }
+            catch (OracleException e)
+            {
+                //https://docs.oracle.com/en/error-help/db/ora-00955/?r=26ai
+                if (e.Number != 955)
+                    throw;
+            }
+        }
     }
 }
