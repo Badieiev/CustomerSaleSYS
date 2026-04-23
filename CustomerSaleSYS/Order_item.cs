@@ -123,7 +123,8 @@ namespace CustomerSaleSYS
         {
             string sqlQuery = "SELECT COUNT(ProductId) " +
                               "FROM Order_items " +
-                              "WHERE ProductId = " + productId;
+                              "WHERE ProductId = " + productId +
+                              " AND Status = 'A'";
             DataSet dr = Database.ExecuteMultiRowQuery(sqlQuery);
             int check = 0;
             foreach (DataRow row in dr.Tables[0].Rows)

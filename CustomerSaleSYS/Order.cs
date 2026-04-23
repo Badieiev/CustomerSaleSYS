@@ -155,7 +155,8 @@ namespace CustomerSaleSYS
         {
             string sqlQuery = "SELECT COUNT(CustomerId) " +
                               "FROM Orders " +
-                              "WHERE CustomerId = " + customerId;
+                              "WHERE CustomerId = " + customerId +
+                              " AND Status = 'A'";
             DataSet dr = Database.ExecuteMultiRowQuery(sqlQuery);
             int check = 0;
             foreach (DataRow row in dr.Tables[0].Rows)

@@ -18,6 +18,7 @@ namespace CustomerSaleSYS
             string query = "SELECT SUM(OrderSum), to_Char(OrderDate,'MM') " +
                             "FROM Orders " +
                             "WHERE EXTRACT(YEAR FROM OrderDate) = " + year +
+                            " AND Status = 'A' " +
                             "GROUP BY to_Char(OrderDate,'MM') " +
                             "ORDER BY to_Char(OrderDate,'MM')";
             DataSet ds = Database.ExecuteMultiRowQuery(query);
@@ -28,7 +29,7 @@ namespace CustomerSaleSYS
 
             //Next, save the amounts returned in query to the appropriate element in amounts[]
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                amounts[i] = Convert.ToDecimal(ds.Tables[0].Rows[i][0]);
+                amounts[Convert.ToInt32(ds.Tables[0].Rows[i][1]) - 1] = Convert.ToDecimal(ds.Tables[0].Rows[i][0]);
 
             //decide if you want grid lines on the chart (none at present)
             chart.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
@@ -50,6 +51,7 @@ namespace CustomerSaleSYS
         {
             String sqlQuery = "SELECT to_Char(OrderDate,'YYYY') " +
                                 "FROM Orders " +
+                                "WHERE Status = 'A' " +
                                 "GROUP BY to_Char(OrderDate,'YYYY') " +
                                 "ORDER BY to_Char(OrderDate,'YYYY')";
             return Database.ExecuteMultiRowQuery(sqlQuery);
@@ -66,6 +68,7 @@ namespace CustomerSaleSYS
                                     "FROM Order_items oi " +
                                     "JOIN Orders o ON oi.OrderId = o.OrderId " +
                                     "WHERE EXTRACT(YEAR FROM o.OrderDate) = " + year +
+                                    " AND o.Status = 'A' " +
                                     "GROUP BY oi.ProductId " +
                                     "ORDER BY total DESC " +
                                 ") i " +
@@ -108,6 +111,7 @@ namespace CustomerSaleSYS
                          "NVL(SUM(OrderSum),0) AS Total " +
                          "FROM ORDERS " +
                          "WHERE EXTRACT(YEAR FROM OrderDate) = " + year +
+                         " AND Status = 'A' " +
                          "GROUP BY to_char(OrderDate, 'MON'), to_char(OrderDate, 'MM') " +
                          "ORDER BY to_char(OrderDate, 'MM')";
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
